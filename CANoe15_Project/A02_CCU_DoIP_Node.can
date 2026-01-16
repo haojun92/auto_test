@@ -1,0 +1,797 @@
+/*@!Encoding:936*/
+includes
+{
+  
+}
+
+variables
+{
+  //DoIP相关参数
+  const dword TesterLogicalAddress = 0x0E80;
+  const dword vehicleLogicAddress  = 0xE;
+  
+  char gDiagTarget[10] = "ADC";
+  const byte KeySize = 4;
+  byte gTesterSeedArray[KeySize];
+  byte gAdcKeyArray[KeySize];
+  int gTesterSeedArrySize = 4;
+  dword gAdcKeyArrySize = 4;
+  int gSecurityLevel_0x01 = 0x01;
+  int gSecurityLevel_0x21 = 0x21;
+  diagRequest HoloArk_ADC.SeedLevel1_Request        gSeedReq_0x01;
+  diagRequest HoloArk_ADC.KeyLevel1_Send            gKeyReq_0x02;
+  diagRequest HoloArk_ADC.RequestSeed_0x21_Request  gSeedReq_0x21;
+  diagRequest HoloArk_ADC.SendKey_0x22_Send         gKeyReq_0x22;
+  char gVarinat[200] = "Common";
+  char gOption[200] = "";
+  int gMaxKeyArraySize = 4;
+  char gDebugBuffer[2000];
+  
+  dword glbHandle=0;
+  long mNewPage; // Sink identifier
+  byte upgradecompleteflag = 0;
+  
+  //升级相关全局变量
+  dword _Update_Target_Path_Size = 0;
+  char  _Update_Target_Path[1024];
+  long _Update_File_Uncompressed_Size = 0;
+  long _Update_File_Compressed_Size   = 0;
+  char _Update_Filename[1024];
+  dword _Update_File_Size = 0;
+  
+  
+  diagRequest HoloArk_ADC.DefaultSession_Start              _0x10Service_0x01_sub;
+  diagRequest HoloArk_ADC.ExtendedDiagnosticSession_Start   _0x10Service_0x03_sub;
+  diagRequest HoloArk_ADC.File_Transfer_Transmit            _0x36Service;
+  diagRequest HoloArk_ADC.Upload_Download_Stop              _0x37Service;
+  diagRequest HoloArk_ADC.File_Transfer_Add                 _0x38Service_0x01_sub;
+  
+  //0x31服务的诊断请求句柄
+  diagRequest HoloArk_ADC.CheckDownloadPreconditions_Start         _0x31_01_2101_Rq;
+  diagRequest HoloArk_ADC.StartCheckFileSHA256Value_Start          _0x31_01_2102_Rq;
+  diagRequest HoloArk_ADC.StartSoftwareInstallation_Start          _0x31_01_2103_Rq;
+  diagRequest HoloArk_ADC.StartFullPackageCheck_Start              _0x31_01_2105_Rq;
+  diagRequest HoloArk_ADC.StartSoftwareRecovery_Start              _0x31_01_2110_Rq;
+  diagRequest HoloArk_ADC.StartSoftwareRecovery_Results            _0x31_03_2110_Rq;
+  diagRequest HoloArk_ADC.StartABPartitionSynchronization_Start    _0x31_01_2111_Rq;
+  diagRequest HoloArk_ADC.StartABPartitionSynchronization_Results  _0x31_03_2111_Rq;
+  diagRequest HoloArk_ADC.StartSoftwareRecovery_1_Start            _0x31_01_2112_Rq;
+  diagRequest HoloArk_ADC.StartSoftwareRecovery_1_Results          _0x31_03_2112_Rq;
+  diagRequest HoloArk_ADC.StartSoftwareVerification_Start          _0x31_01_2113_Rq;
+  diagRequest HoloArk_ADC.StartSoftwareVerification_Results        _0x31_03_2113_Rq;
+}
+
+//"开始升级"
+on sysvar_update sysvar::DoIP::upgradebuttonvalue
+{
+  char display_buffer[256];
+  long copiedBytes;
+  if(sysGetVariableInt(sysvar::DoIP::upgradebuttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","配置信息：\n");
+    
+    diagSendRequest(_0x10Service_0x01_sub);
+    testWaitForTimeout(500);
+    diagSendRequest(_0x10Service_0x03_sub);
+    testWaitForTimeout(500);
+    
+    diagSendRequest(gSeedReq_0x21);
+    testWaitForTimeout(500);
+    
+    //copiedBytes = getValue(sysvar::DoIP::securitycertificationdllpath,pathbuffer);
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","开始升级\n");
+    
+    RequestFileTransfer1(0x01);
+    testWaitForTimeout(1000);
+    
+    _36_service();
+    
+    diagSendRequest(_0x37Service);
+  }
+}
+
+
+//"开始升级"
+on key 'U'
+{
+  char display_buffer[256];
+  long copiedBytes;
+
+  //putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","配置信息：\n");
+  
+  //diagSendRequest(_0x10Service_0x01_sub);
+  //testWaitForTimeout(1000);
+  //diagSendRequest(_0x10Service_0x03_sub);
+  //testWaitForTimeout(1000);
+  
+  //diagSendRequest(gSeedReq_0x21);
+  //testWaitForTimeout(1000);
+  
+  //copiedBytes = getValue(sysvar::DoIP::securitycertificationdllpath,pathbuffer);
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","开始升级\n");
+  
+  DiagnosticSessionControl(0x01);
+  DiagnosticSessionControl(0x03);
+  RequestFileTransfer1(0x01);
+  //testWaitForTimeout(1000);
+  
+  _36_service();
+  
+  //diagSendRequest(_0x37Service);
+}
+
+//on sysvar_update sysvar::DoIP::securitycertificationdllpath
+//{
+//  char string[2048];
+//  dword stringsize = 0;
+//  
+//  sysGetVariableString(sysvar::DoIP::securitycertificationdllpath,string,elCount(string));
+//  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","安全认证文件路径:");
+//  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View",string);
+//  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","\n");
+//  
+//  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","安全认证文件加载完成\n");
+//}
+
+
+//获取升级文件名和文件路径
+//on sysvar_update sysvar::DoIP::filenameandpath
+//{  
+//  sysGetVariableString(sysvar::DoIP::filenameandpath,_Update_Filename,elCount(_Update_Filename));
+//  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","升级文件路径:");
+//  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View",_Update_Filename);
+//  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","\n");
+//  _Update_File_Size = sysGetVariableArrayLength(sysvar::DoIP::filenameandpath);
+//  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","update file path size:");
+//  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View",_Update_File_Size);
+//  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","\n");
+//  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","升级文件加载完成\n");
+//}
+
+//获取升级文件名和文件路径
+on sysvar_update sysvar::DoIP::filenameandpath
+{
+  sysGetVariableString(sysvar::DoIP::filenameandpath,_Update_Filename,elCount(_Update_Filename));
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","升级文件路径:");
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View",_Update_Filename);
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","\n");
+  _Update_File_Size = sysGetVariableArrayLength(sysvar::DoIP::filenameandpath);
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","update file path size:");
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View",_Update_File_Size);
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","\n");
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","升级文件加载完成\n");
+}
+
+//获取升级目标路径&文件名
+on sysvar_update sysvar::DoIP::upgradetargetpath
+{  
+  sysGetVariableString(sysvar::DoIP::upgradetargetpath,_Update_Target_Path,elCount(_Update_Target_Path));
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","升级目标路径&文件名称:");
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View",_Update_Target_Path);
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","\n");
+  _Update_Target_Path_Size = sysGetVariableArrayLength(sysvar::DoIP::upgradetargetpath);
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","update target path size:");
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View",_Update_Target_Path_Size);
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","\n");
+}
+
+
+//获取升级文件未压缩时的字节数
+on sysvar_update sysvar::DoIP::UpdateFileUncompressedSizeValue
+{
+  _Update_File_Uncompressed_Size = sysGetVariableInt(sysvar::DoIP::UpdateFileUncompressedSizeValue);
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","升级文件未压缩大小(bytes)：");
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View",_Update_File_Uncompressed_Size);
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","\n");
+}
+
+
+//获取升级文件压缩后的字节数
+on sysvar_update sysvar::DoIP::UpdateFileCompressedSizeValue
+{
+  _Update_File_Compressed_Size = sysGetVariableInt(sysvar::DoIP::UpdateFileCompressedSizeValue);
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","升级文件未压缩大小(bytes)：");
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View",_Update_File_Compressed_Size);
+  putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","\n");
+}
+
+
+//手动请求Level_01 seed&Key
+on key 's'
+{
+  write("diagSendRequest(gSeedReq_0x01)");
+  diagSendRequest(gSeedReq_0x01);
+}
+
+//手动请求Level_21 seed&Key
+on key 'S'
+{
+  write("diagSendRequest(gSeedReq_0x21)");
+  diagSendRequest(gSeedReq_0x21);
+}
+
+testfunction securityRequsetSeed(byte subid)
+{
+  byte functionid = 0x21;
+  byte buffer[2];
+  buffer[0] = functionid;
+  buffer[1] = subid;
+  DoIP_DataReq(buffer, 2, vehicleLogicAddress, TesterLogicalAddress);
+}
+
+//计算秘钥0x01
+on diagResponse HoloArk_ADC.SeedLevel1_Request
+{
+  int i;
+  long ret;
+  
+  this.GetParameterRaw("SecuritySeed",gTesterSeedArray,elCount(gTesterSeedArray));
+  write("Security Level = %x",(byte)diagGetParameter(this,"SecurityAccessType"));
+  for(i=0;i<gTesterSeedArrySize;i++)
+  {
+    write("0x01_testerSeedArray[%d] = %x",i,gTesterSeedArray[i]);
+  }
+  
+  diagSetTarget("HoloArk_ADC");
+  ret=diagGenerateKeyFromSeed(gTesterSeedArray,gTesterSeedArrySize,gSecurityLevel_0x01,gVarinat,gOption,gAdcKeyArray,gMaxKeyArraySize,gAdcKeyArrySize);
+  write("Result of Tester GenerateKeyFromSeed:%d",ret);
+  
+  for(i = 0; i < gAdcKeyArrySize; i++)
+  {
+    write("0x02_gAdcKeyArray[%d] = %X",i,gAdcKeyArray[i]);
+  }
+  diagSetParameterRaw(gKeyReq_0x02,"SecurityKey",gAdcKeyArray,gAdcKeyArrySize);
+  diagSendRequest(gKeyReq_0x02);
+}
+
+on diagResponse HoloArk_ADC.RequestSeed_0x21_Request
+{
+  int i;
+  long ret;
+  
+  this.GetParameterRaw("SecuritySeed",gTesterSeedArray,elCount(gTesterSeedArray));
+  write("Security Level = %x",(byte)diagGetParameter(this,"SecurityAccessType"));
+  for(i=0;i<gTesterSeedArrySize;i++)
+  {
+    write("0x21_testerSeedArray[%d] = %x",i,gTesterSeedArray[i]);
+  }
+  
+  diagSetTarget("HoloArk_ADC");
+  ret=diagGenerateKeyFromSeed(gTesterSeedArray,gTesterSeedArrySize,gSecurityLevel_0x21,gVarinat,gOption,gAdcKeyArray,gMaxKeyArraySize,gAdcKeyArrySize);
+  write("Result of Tester GenerateKeyFromSeed:%d",ret);
+  
+  for(i = 0; i < gAdcKeyArrySize; i++)
+  {
+    write("0x22_gAdcKeyArray[%d] = %X",i,gAdcKeyArray[i]);
+  }
+  diagSetParameterRaw(gKeyReq_0x22,"SecurityKey",gAdcKeyArray,gAdcKeyArrySize);
+  diagSendRequest(gKeyReq_0x22);
+}
+
+
+//计算秘钥0x21
+//on diagResponse HoloArk_ADC.RequestSeed_0x21_Request
+//{
+//  int i;
+//  long ret;
+//  
+//  this.GetParameterRaw("SecuritySeed",gTesterSeedArray,elCount(gTesterSeedArray));
+//  write("Security Level = %x",(byte)diagGetParameter(this,"SecurityAccessType"));
+//  for(i=0;i<gTesterSeedArrySize;i++)
+//  {
+//    write("testerSeedArray[%d] = %x",i,gTesterSeedArray[i]);
+//  }
+//  
+//  diagSetTarget("HoloArk_ADC");
+//  ret=diagGenerateKeyFromSeed(gTesterSeedArray,gTesterSeedArrySize,gSecurityLevel,gVarinat,gOption,gAdcKeyArray,gMaxKeyArraySize,gAdcKeyArrySize);
+//  write("Result of Tester GenerateKeyFromSeed:%d",ret);
+//  if(ret == 0)
+//  {
+//    for(i = 0; i < gAdcKeyArrySize; i++)
+//    {
+//      write("gAdcKeyArray[%d] = %X",i,gAdcKeyArray[i]);
+//    }
+//    diagSetParameterRaw(gKeyReq_0x22,"SecurityKey",gAdcKeyArray,gAdcKeyArrySize);
+//    diagSendRequest(gKeyReq_0x22);
+//  }
+//}
+
+_diag_GetError(char buffer[])
+{
+  snprintf(gDebugBuffer,elCount(gDebugBuffer),"%s",buffer);
+  write("CALLBACK %s",gDebugBuffer);
+}
+
+on preStart
+{
+  char buffer[256];
+  DoIP_SetLocalIPaddress("172.16.0.200");//CANoe节点IP
+  DoIP_SetVehicleAddress("172.16.0.14"); //被测服务端节点IP
+  DoIP_SetTesterLogicalAddress(TesterLogicalAddress);
+  DoIP_SetVehicleLogicalAddress(vehicleLogicAddress);
+  DoIP_InitAsTester();
+  
+}
+
+//read file and get info
+On key 'w'
+{ 
+  RequestFileTransfer();
+}
+
+//on key 't'
+testfunction _36_service()
+{
+  int binsize = 0;
+  byte buffer_bin[0xFFFD];//这里的上限是4G，但是脚本中的buffer不允许超过0xFFFF
+  byte data[0xFFFF];
+  long retSize;
+  int i;
+  int index = 1;//首次为1，大于255之后为0，再次递增
+  
+  // Opens the file in binary mode for read access.
+  glbHandle = OpenFileRead ("C:\\Users\\holo\\Desktop\\CD_test\\holoark_diag.zip",1);
+  //glbHandle = OpenFileRead (_Update_Target_Path,1);
+  
+  if ( glbHandle!=0 )
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","升级文件读取正确\n");
+    do{
+        retSize = fileGetBinaryBlock(buffer_bin,elcount(buffer_bin),glbHandle);
+        write("retSize:%d",retSize);
+        putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","retSize:");
+        putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View",retSize);
+//        for(i=0;i< retSize;i++)
+//        {
+//          writeLineEx (mNewPage,1,"buffer_bin[%d]: %x.",i,buffer_bin[i]);
+//        }
+        data[0] = 0x36;
+        data[1] = index;
+        index++;
+        for(i = 0; i < retSize; i++)
+        {
+          data[2+i] = buffer_bin[i];
+        }
+        
+        TransferData(data,(retSize+2));
+        sysSetVariableInt(sysvar::DoIP::upgradeprogressvalue,index);
+        testWaitForTimeout(1000);
+    }while(retSize > 0);   
+    fileClose (glbHandle);      
+  }
+  else
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","升级文件读取失败，请检查\n");
+  }
+//  data[0] = 0x36;
+//  data[1] = 0x01;
+//  for(i = 0; i < 0x500; i++)
+//  {
+//    data[2+i] = buffer_bin[i];
+//  }
+  
+//  TransferData(data,0x501);
+  upgradecompleteflag = 3;
+}
+
+on key '1'
+{
+  //DiagnosticSessionControl(0x01);//这个有问题，会报错
+  diagSendRequest(_0x10Service_0x01_sub);
+}
+
+on key '2'
+{
+  //DiagnosticSessionControl(0x03);//这个有问题，会报错
+  diagSendRequest(_0x10Service_0x03_sub);
+}
+
+on key '3'
+{
+  diagSendRequest(gSeedReq_0x21);
+}
+
+on key '4'
+{
+  byte FilePathandNameLength[2]  = {0x00,0x2F};
+  byte FilePathandName[47]       = {0x2F,0x68,0x6F,0x6D,0x65,0x2F,0x71,0x69,0x61,0x6E,0x70,0x65,0x6E,0x67,0x70,0x65,0x6E,0x67,0x2F,0x75,0x70,0x64,0x61,0x74,0x65,0x5F,0x74,0x65,0x73,0x74,0x2F,0x68,0x6F,0x6C,0x6F,0x61,0x72,0x6B,0x5F,0x64,0x69,0x61,0x67,0x2E,0x7A,0x69,0x70};//"/home/qianpengpeng/update_test/holoark_diag.zip";
+  byte Data_Format_Identifier[1] = {0x11};
+  byte File_Size[1]              = {0x03};
+  byte fileSizeUncompressed[3]   = {0x07,0xF8,0x00};//0x0007F800;
+  byte fileSizeCompressed[3]     = {0x02,0x78,0x2F};//0x0002782F;
+  //RequestFileTransfer1(0x01);
+  
+  //FilePathandNameLength:"/home/qianpengpeng/update_test/holoark_diag.zip"
+  diagSetParameterRaw(_0x38Service_0x01_sub,"FilePathandNameLength",FilePathandNameLength,2);
+  
+  //FilePathandName:
+  diagSetParameterRaw(_0x38Service_0x01_sub,"FilePathandName",FilePathandName,0x2F);
+  
+  //Data Format Identifier:
+  diagSetParameterRaw(_0x38Service_0x01_sub,"DataFormatIdentifier",Data_Format_Identifier,1);
+  
+  //File Size:
+  diagSetParameterRaw(_0x38Service_0x01_sub,"FileSize",File_Size,1);
+  
+  //fileSizeUncompressed:
+  diagSetParameterRaw(_0x38Service_0x01_sub,"fileSizeUncompressed",fileSizeUncompressed,3);
+  
+  //fileSizeCompressed:
+  diagSetParameterRaw(_0x38Service_0x01_sub,"fileSizeCompressed",fileSizeCompressed,3);
+  
+  diagSendRequest(_0x38Service_0x01_sub);
+}
+
+on key '5'
+{
+  int binsize = 0;
+  byte buffer_bin[0xFFFD];//这里的上限是4G，但是脚本中的buffer不允许超过0xFFFF
+  byte data[0xFFFF];
+  long retSize;
+  int i;
+  byte index[1] = {0x01};//首次为1，大于255之后为0，再次递增
+  
+  // Opens the file in binary mode for read access.
+  glbHandle = OpenFileRead ("C:\\Users\\holo\\Desktop\\CD_test\\holoark_diag.zip",1);
+  //glbHandle = OpenFileRead (_Update_Target_Path,1);
+  
+  if ( glbHandle!=0 )
+  {
+    write("升级文件读取正确");
+    do{
+        retSize = fileGetBinaryBlock(buffer_bin,elcount(buffer_bin),glbHandle);
+        if(retSize == 0) 
+          break;
+        write("retSize = %d",  retSize);
+        diagSetParameterRaw(_0x36Service,"Block_Sequence_Counter",index,1);
+        diagSetParameterRaw(_0x36Service,"Transfer_Request_Parameter_Record",buffer_bin,retSize);
+        diagSendRequest(_0x36Service);
+        index[0] += 1;
+        if(index[0] > 255) index[0] = 0;
+        testWaitForTimeout(1000);
+    }while(retSize > 0);   
+    fileClose (glbHandle);      
+  }
+  else
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","升级文件读取失败，请检查\n");
+  }
+//  data[0] = 0x36;
+//  data[1] = 0x01;
+//  for(i = 0; i < 0x500; i++)
+//  {
+//    data[2+i] = buffer_bin[i];
+//  }
+  
+//  TransferData(data,0x501);
+  upgradecompleteflag = 3;
+}
+
+on key '6'
+{
+  diagSendRequest(_0x37Service);
+}
+
+//on key '2'
+//{
+//  char VIN[18] = "FFFFFFFFFFFFFFFF1";
+//  DoIP_SetIdentificationRequestVIN(VIN);
+//}
+
+//0x10
+testfunction DiagnosticSessionControl(byte subid)
+{
+  byte functionid = 0x10;
+  byte buffer[2];
+  buffer[0] = functionid;
+  buffer[1] = subid;
+  DoIP_DataReq(buffer, 2, vehicleLogicAddress, TesterLogicalAddress);
+}
+
+//0x36
+testfunction TransferData(byte data[],int datasize)
+{
+  DoIP_DataReq(data, datasize, vehicleLogicAddress, TesterLogicalAddress);
+}
+
+//0x37
+testfunction RequestTransferExit(byte subid)
+{
+  byte functionid = 0x10;
+  byte buffer[2];
+  buffer[0] = functionid;
+  buffer[1] = subid;
+  DoIP_DataReq(buffer, 2, vehicleLogicAddress, TesterLogicalAddress);
+}
+
+
+//0x38
+testfunction RequestFileTransfer()
+{
+  byte functionid = 0x38;
+  byte filePathandNameLength = 0x1F;
+  byte filePathandName[31] = {0x2F,0x68,0x6F,0x6D,0x65,0x2F,0x75,0x73,0x65,0x72,0x2F,0x64,0x76, 
+    0x70,0x2F,0x68,0x6F,0x6C,0x6F,0x61,0x72,0x6B,0x5F,0x64,0x69,0x61,0x67,0x2E,0x7A,0x69,0x70};
+  byte dataFormatIdentifier = 0x11;
+  byte fileSizeParameterLength = 0x03;
+  byte fileSizeUncompressed[3] = {0x07,0xF8,0x00};
+  byte fileSizeCompressed[3] = {0x02,0x78,0x2F};
+  byte buffer[43];
+  int i=0;
+  
+  buffer[0] = functionid;
+  buffer[1] = 0x01;//mode of Operation
+  buffer[2] = 0x00;
+  buffer[3] = filePathandNameLength;
+  for(i=0;i<31;i++)
+  {
+    buffer[4+i] = filePathandName[i];
+  }
+  
+  buffer[35] = 0x11;
+  buffer[36] = 0x03;
+  buffer[37] = 0x07;
+  buffer[38] = 0xF8;
+  buffer[39] = 0x00;
+  buffer[40] = 0x02;
+  buffer[41] = 0x78;
+  buffer[42] = 0x2F; 
+  
+  DoIP_DataReq(buffer, 43, vehicleLogicAddress, TesterLogicalAddress);
+}
+
+
+//$38服务，通过panel获取相关参数
+testfunction RequestFileTransfer1(byte subfunction_id)
+{
+  byte functionid = 0x38;
+  word filePathandNameLength = 0x1F;
+  byte filePathandName[1024];
+  byte dataFormatIdentifier    = 0x11; //可手动修改
+  byte fileSizeParameterLength = 0x04; //可手动修改
+  byte buffer[1024];
+  int i=0;
+  
+  if(subfunction_id == 0x01) //文件传输子功能
+  {
+    buffer[0] = functionid;
+    buffer[1] = subfunction_id;//mode of Operation
+    buffer[2] = (byte)(filePathandNameLength>>8);
+    buffer[3] = (byte)filePathandNameLength;
+    if(_Update_Target_Path_Size > 0)
+    {
+      for(i = 0; i < _Update_Target_Path_Size;i++)
+      {
+        buffer[4+i] = _Update_Target_Path[i];
+      }
+    }
+    else
+    {
+      putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","目标路径长度错误，请检查\n");
+    }
+    
+    buffer[5+_Update_Target_Path_Size]  = dataFormatIdentifier;
+    buffer[6+_Update_Target_Path_Size]  = fileSizeParameterLength;
+    buffer[7+_Update_Target_Path_Size]  = (byte)(_Update_File_Uncompressed_Size>>24);
+    buffer[8+_Update_Target_Path_Size]  = (byte)(_Update_File_Uncompressed_Size>>16);
+    buffer[9+_Update_Target_Path_Size]  = (byte)(_Update_File_Uncompressed_Size>>8);
+    buffer[10+_Update_Target_Path_Size] = (byte)(_Update_File_Uncompressed_Size);
+    buffer[11+_Update_Target_Path_Size] = (byte)(_Update_File_Compressed_Size>>24);
+    buffer[12+_Update_Target_Path_Size] = (byte)(_Update_File_Compressed_Size>>16);
+    buffer[13+_Update_Target_Path_Size] = (byte)(_Update_File_Compressed_Size>>8);
+    buffer[14+_Update_Target_Path_Size] = (byte)(_Update_File_Compressed_Size);
+    
+    DoIP_DataReq(buffer, (14+_Update_Target_Path_Size), vehicleLogicAddress, TesterLogicalAddress);
+    
+  }
+  else if(subfunction_id == 0x06) //断电续传
+  {
+    //TBD.
+  }
+  else
+  {
+    //no code.
+  }
+}
+
+
+//测试RID:0x2101，下载条件检查
+on key 'z'
+{
+  diagSendRequest(_0x31_01_2101_Rq);
+}
+
+on sysvar_update sysvar::DoIP::RID0x2101buttonvalue
+{
+  if(sysGetVariableInt(sysvar::DoIP::RID0x2101buttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","软件下载条件校验开始\n");
+  }
+}
+
+//测试RID:0x2102，安装文件完整性检查，跟文件哈希值
+on key 'x'
+{
+  
+}
+
+on sysvar_update sysvar::DoIP::RID0x2102buttonvalue
+{
+  if(sysGetVariableInt(sysvar::DoIP::RID0x2102buttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","安装文件完整性校验开始\n");
+  }
+}
+
+//测试RID:0x2103，启动软件安装，跟软件安装时的绝对时间
+on key 'c'
+{
+  
+}
+
+on sysvar_update sysvar::DoIP::RID0x2103buttonvalue
+{
+  if(sysGetVariableInt(sysvar::DoIP::RID0x2103buttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","启动软件安装例程\n");
+  }
+}
+
+//测试RID:0x2105，启动软件包组包
+on key 'v'
+{
+  diagSendRequest(_0x31_01_2105_Rq);
+}
+
+on sysvar_update sysvar::DoIP::RID0x2105buttonvalue
+{
+  if(sysGetVariableInt(sysvar::DoIP::RID0x2105buttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","启动软件安装例程\n");
+  }
+}
+
+//测试RID:0x2110,start，启动软件回滚
+on key 'b'
+{
+  diagSendRequest(_0x31_01_2110_Rq);
+}
+
+on sysvar_update sysvar::DoIP::RID0x2110Startbuttonvalue
+{
+  if(sysGetVariableInt(sysvar::DoIP::RID0x2110Startbuttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","启动软件自回滚例程\n");
+  }
+}
+
+//测试RID:0x2110,result，查询软件回滚状态
+on key 'B'
+{
+  diagSendRequest(_0x31_03_2110_Rq);
+}
+
+on sysvar_update sysvar::DoIP::RID0x2110Resultbuttonvalue
+{
+  if(sysGetVariableInt(sysvar::DoIP::RID0x2110Resultbuttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","查询软件自回滚例程结果\n");
+  }
+}
+
+//测试RID:0x2111,start，启动AB分区同步
+on key 'a'
+{
+  diagSendRequest(_0x31_01_2111_Rq);
+}
+
+on sysvar_update sysvar::DoIP::RID0x2111Startbuttonvalue
+{
+  if(sysGetVariableInt(sysvar::DoIP::RID0x2111Startbuttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","启动A/B分区数据同步例程\n");
+    diagSendRequest(_0x31_01_2111_Rq);
+  }
+}
+
+//测试RID:0x2111,result，查询AB分区状态
+on key 'A'
+{
+  diagSendRequest(_0x31_03_2111_Rq);
+}
+
+on sysvar_update sysvar::DoIP::RID0x2111Resultbuttonvalue
+{
+  if(sysGetVariableInt(sysvar::DoIP::RID0x2111Resultbuttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","查询A/B分区数据同步例程结果\n");
+    diagSendRequest(_0x31_03_2111_Rq);
+  }
+}
+
+//测试RID:0x2112,start，启动升级包解密
+on key 'd'
+{
+  diagSendRequest(_0x31_01_2112_Rq);
+}
+
+on sysvar_update sysvar::DoIP::RID0x2112Startbuttonvalue
+{
+  if(sysGetVariableInt(sysvar::DoIP::RID0x2112Startbuttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","启动升级包解密例程\n");
+    diagSendRequest(_0x31_01_2112_Rq);
+  }
+}
+
+//测试RID:0x2112,result，查询升级包解密状态
+on key 'D'
+{
+  diagSendRequest(_0x31_03_2112_Rq);
+}
+
+on sysvar_update sysvar::DoIP::RID0x2112Resultbuttonvalue
+{
+  if(sysGetVariableInt(sysvar::DoIP::RID0x2112Resultbuttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","查询升级包解密例程结果\n");
+    diagSendRequest(_0x31_03_2112_Rq);
+  }
+}
+
+//测试RID:0x2113,start，启动升级包验签
+on key 'f'
+{
+  diagSendRequest(_0x31_01_2113_Rq);
+}
+
+on sysvar_update sysvar::DoIP::RID0x2113Startbuttonvalue
+{
+  if(sysGetVariableInt(sysvar::DoIP::RID0x2113Startbuttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","启动升级包验签例程\n");
+    diagSendRequest(_0x31_01_2113_Rq);
+  }
+}
+
+//测试RID:0x2113,result，查询升级包验签状态
+on key 'F'
+{
+  diagSendRequest(_0x31_03_2113_Rq);
+}
+
+on sysvar_update sysvar::DoIP::RID0x2113Resultbuttonvalue
+{
+  if(sysGetVariableInt(sysvar::DoIP::RID0x2113Resultbuttonvalue) == 1)
+  {
+    putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","查询升级包验签例程结果\n");
+    diagSendRequest(_0x31_03_2113_Rq);
+  }
+}
+
+//清空log
+on sysvar_update sysvar::DoIP::clearlog
+{
+  if(sysGetVariableInt(sysvar::DoIP::clearlog) == 1)
+  {
+    
+  }
+}
+
+
+void MainTest()
+{
+  //DoIP_ConnectToVehicle(); //如果要调用DoIP的接口，需要打开这个
+  //testWaitForTimeout(1000);
+  //putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","车辆连接完成\n");
+  
+  //RequestFileTransfer();
+//  testWaitForTimeout(1000);
+//  _36_service();
+  while(1)
+  {
+    testWaitForTimeout(1000);
+  }
+}
+
+
