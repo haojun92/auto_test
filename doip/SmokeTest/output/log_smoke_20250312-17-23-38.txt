@@ -1,0 +1,13 @@
+Received DoIP Message. Type: 0x6, Payload Size: 13 bytes, Payload: 0E 80 04 10 10 00 00 00 00 FF FF FF FF
+Sending DoIP Message: Type: 0x8001, Payload Size: 6, Payload: 0E 80 04 10 10 03
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 10 78
+Received DoIP Message. Type: 0x8001, Payload Size: 10 bytes, Payload: 04 10 0E 80 50 03 00 32 01 F4
+Sending DoIP Message: Type: 0x8001, Payload Size: 7, Payload: 0E 80 04 10 28 03 03
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 28 78
+Received DoIP Message. Type: 0x8001, Payload Size: 6 bytes, Payload: 04 10 0E 80 68 03
+Sending DoIP Message: Type: 0x8001, Payload Size: 7, Payload: 0E 80 04 10 28 00 03
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 28 78
+Received DoIP Message. Type: 0x8001, Payload Size: 6 bytes, Payload: 04 10 0E 80 68 00

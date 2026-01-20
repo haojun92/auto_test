@@ -1,0 +1,87 @@
+/************Commit-log************/
+MainrRepo:
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<rlgs change log>---Author:Wangxinghua Message:RLGS_2503100002_[E01J3-528]_当车道线消失时切换dop对前车轨迹缩紧限制，防止出现与横向车辆发生碰撞]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503100004 edr modify for debug]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503100004 edr output length and width]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<tos change log>---Author:任红美 Message:TOS_2503101605_[E01J3-511]_新增自车贴线二轮车目标筛选逻辑]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<vmc change log>---Author:li hang Message:VMC_2503100000_修改检测到车道线跳变时，使用变道的角度限制，不使用变道激活的角度限制]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:debug build error---Author:王程 Message:AEB_Version 2503100003 E01J3-514 E01J3-515 状态机条件错误修正]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503100002 ccrs全速度段运动补偿]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<rlgs change log>---Author:Wangxinghua Message:中心线计算采取打点拟合方式（部分场景），P_PG_centerLinePolyfitEnable]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503100001 modify edr output dwidth to heading]---
+    Hulijie--2025-03-10 10:41:11--MSG[add special_vehicle and tiny_car type for objects_type]---
+/************Commits last 7 days************/
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<rlgs change log>---Author:Wangxinghua Message:RLGS_2503100002_[E01J3-528]_当车道线消失时切换dop对前车轨迹缩紧限制，防止出现与横向车辆发生碰撞]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503100004 edr modify for debug]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503100004 edr output length and width]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<tos change log>---Author:任红美 Message:TOS_2503101605_[E01J3-511]_新增自车贴线二轮车目标筛选逻辑]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<vmc change log>---Author:li hang Message:VMC_2503100000_修改检测到车道线跳变时，使用变道的角度限制，不使用变道激活的角度限制]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:debug build error---Author:王程 Message:AEB_Version 2503100003 E01J3-514 E01J3-515 状态机条件错误修正]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503100002 ccrs全速度段运动补偿]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<rlgs change log>---Author:Wangxinghua Message:中心线计算采取打点拟合方式（部分场景），P_PG_centerLinePolyfitEnable]---
+    程振宁--2025-03-10 15:41:27--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503100001 modify edr output dwidth to heading]---
+    Hulijie--2025-03-10 10:41:11--MSG[add special_vehicle and tiny_car type for objects_type]---
+    程振宁--2025-03-09 20:50:54--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:fix build error---Author:王程 Message:AEB_Version 2503090001 停车场场景解决误触发]---
+    程振宁--2025-03-08 21:12:20--MSG[sync pnc submodule---build P31_pnc_asw:main---<icas change log>---Author:SamQiu Message:ICAS_2503080201_add abs to steerwheelspd]---
+    程振宁--2025-03-08 20:25:47--MSG[sync pnc submodule---build P31_pnc_asw:main---<las change log>---Author:姜宝祥 Message:Las_Version = 2503082015_abs steerangspd]---
+    程振宁--2025-03-08 19:59:29--MSG[sync pnc submodule---build P31_pnc_asw:main---<tos change log>---Author:任红美 Message:Merge branch ~0308~ into ~main~---Author:姜宝祥 Message:Tos_Version =2503081700_增加躲闪回正延迟]---
+    程振宁--2025-03-08 18:34:58--MSG[sync pnc submodule---build P31_pnc_asw:main---<vmc change log>---Author:li hang Message:VMC_2503080001_微调控制参数]---
+    程振宁--2025-03-08 17:48:56--MSG[sync pnc submodule---build P31_pnc_asw:main---<vmc change log>---Author:li hang Message:VMC_2503080000_[E01J3-508]_修改控制参数，功能激活时候A1的角度限制参数]---
+    程振宁--2025-03-08 17:35:31--MSG[sync pnc submodule---build P31_pnc_asw:main---<las change log>---Author:姜宝祥 Message:debug build error---Author:姜宝祥 Message:Las_Version = 2503081700_方向盘转速退出条件and一下非脱手，且驾驶员扭矩方向一致，必须非脱手且方向盘转速超限才退出，防止控制自己转退了]---
+    程振宁--2025-03-08 16:24:43--MSG[sync pnc submodule---build P31_pnc_asw:main---<icas change log>---Author:SamQiu Message:ICAS_2503080101_change lcc steerwheelexit logic; add and with not hands off]---
+    程振宁--2025-03-08 16:10:41--MSG[sync pnc submodule---build P31_pnc_asw:main---<icas change log>---Author:SamQiu Message:ICAS_add parameter to lcc steer whl exit time]---
+    程振宁--2025-03-08 15:13:08--MSG[sync pnc submodule---build P31_pnc_asw:main---<tos change log>---Author:任红美 Message:Merge branch ~TOS0308~ into ~main~---Author:姜宝祥 Message:Tos_Version = 2503081500_[E01J3-509]_修改IESIndex筛选和输出方法，修复Index切换时目标短暂退出的bug]---
+    程振宁--2025-03-08 14:52:57--MSG[sync pnc submodule---build P31_pnc_asw:main---<icas change log>---Author:程振宁 Message:fix sldd---Author:程振宁 Message:修改转速限制横轴为观测量---<las change log>---Author:姜宝祥 Message:Las_Version = 2503081440_将LSS方向盘转速抑制激活相关参数改为标定量]---
+    程振宁--2025-03-08 14:26:08--MSG[sync pnc submodule---build P31_pnc_asw:main---<tos change log>---Author:任红美 Message:debug error---Author:任红美 Message:TOS_2503081345_[E01J3-510]_优化自车换道工况自车车尾越线比例]---
+    程振宁--2025-03-08 11:55:16--MSG[sync pnc submodule---build P31_pnc_asw:main---init build, code not exist---init build, code not exist---init build, code not exist---init build, code not exist---init build, code not exist---init build, code not exist---init build, code not exist---init build, code not exist---init build, code not exist---init build, code not exist]---
+    程振宁--2025-03-07 16:11:55--MSG[sync pnc submodule---build P31_pnc_asw:main---<icas change log>---Author:程振宁 Message:fix build err---Author:SamQiu Message:table fix---Author:SamQiu Message:bugfix---Author:SamQiu Message:ICAS_2503070301_add steerwheel speed parameter; fix dai P0 type coding]---
+    程振宁--2025-03-07 16:11:55--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503070003 修改状态机]---
+    程振宁--2025-03-07 16:11:55--MSG[sync pnc submodule---build P31_pnc_asw:main---<vmp change log>---Author:王亚伟 Message:VMP_2503070001_无_1、适配皮卡等新出的目标类型---<tos change log>---Author:任红美 Message:Merge branch ~TOS0307~ into ~main~---Author:姜宝祥 Message:Tos_Version = 2503072040_[E01J3-493,E01J3-499]_1适配融合新加目标类型2修改皮卡避让bug3修改IES静态行人未避让的bug4卡车误制动修复]---
+    程振宁--2025-03-07 16:11:55--MSG[sync pnc submodule---build P31_pnc_asw:main---<rlgs change log>---Author:Wangxinghua Message:RLGS_2503070001_[E01J3-458]_一分二路口防止规划跳变增加debounce，并增加开关标定量P_PG_doubleLineSelectEnable]---
+    程振宁--2025-03-07 16:11:55--MSG[sync pnc submodule---build P31_pnc_asw:main---<icas change log>---Author:SamQiu Message:bug fix---Author:SamQiu Message:ICAS_Version=2503070201_acc standstill brakeonly hmi fix; add parameter]---
+    程振宁--2025-03-07 16:11:55--MSG[sync pnc submodule---build P31_pnc_asw:main---<las change log>---Author:姜宝祥 Message:debug build error---Author:姜宝祥 Message:Las_Version = 2503071840_修改LDP车轮位置计算方式和阈值---<vmc change log>---Author:li hang Message:VMC_2503070000_修改人机共驾模式下角度请求状态和扭矩请求状态]---
+    程振宁--2025-03-07 16:11:55--MSG[sync pnc submodule---build P31_pnc_asw:main---<vmp change log>---Author:王亚伟 Message:VMP_2503070000_[E01J3-496,E01J3-500]_1、修改p0-range的delay为0.1；2、对于小followttc的cutin目标，不做等待立即报接管]---
+    程振宁--2025-03-07 16:11:55--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503070002 CCRs高速段增加运动补偿]---
+    songkunpeng--2025-03-07 22:31:34--MSG[VAL_2503070002_HMI区分皮卡和货车]---
+    Hulijie--2025-03-07 16:52:07--MSG[add LORRY type for objects_type and delete compensate]---
+    00022317--2025-03-07 06:50:06--MSG[[Simulation][E01J3-470][feature] Finish add repeated proto check.]---
+    00022317--2025-03-07 06:50:06--MSG[[Simulation][E01J3-470][feature] repeated proto check in output/output_fail.(Not finished yet)]---
+    程振宁--2025-03-07 02:25:18--MSG[sync pnc submodule---build P31_pnc_asw:main---<icas change log>---Author:SamQiu Message:ICAS_2503070101_[E01J3-469]_fix acc brakeonly exit to passive hmi]---
+    程振宁--2025-03-07 02:25:18--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503070001 edr output modify]---
+    Zhu Mowu--2025-03-07 01:05:16--MSG[[soc-j3][][feature]:Update the all_in_one package link from version 01.01.14 to 01.01.15]---
+    Zhu Mowu--2025-03-07 01:05:16--MSG[[mcu-bsw][][feature]:Synchronize Lisheng version 01.01.20 BSW]---
+    程振宁--2025-03-06 15:33:00--MSG[sync pnc submodule---build P31_pnc_asw:main---<vmp change log>---Author:li hang Message:VMP_2503060002_消亡车道改成pln失败]---
+    程振宁--2025-03-06 15:33:00--MSG[sync pnc submodule---build P31_pnc_asw:main---<vmp change log>---Author:li hang Message:VMP_2503060001_消亡车道改成pln失败]---
+    程振宁--2025-03-06 15:33:00--MSG[sync pnc submodule---build P31_pnc_asw:main---<icas change log>---Author:SamQiu Message:ICAS_2503060201_change hazard lamp judgement from lamp status to switch status]---
+    程振宁--2025-03-06 15:33:00--MSG[sync pnc submodule---build P31_pnc_asw:main---<tos change log>---Author:任红美 Message:TOS_2503061735_[E01J3-382]_优化车道线外插延伸长度]---
+    程振宁--2025-03-06 15:33:00--MSG[sync pnc submodule---build P31_pnc_asw:main---<icas change log>---Author:SamQiu Message:ICAS_Version=2503060101_[E01J3-477]_P0 vxAbs less than -1kph, inhibit acc]---
+    程振宁--2025-03-06 15:33:00--MSG[sync pnc submodule---build P31_pnc_asw:main---<rlgs change log>---Author:Wangxinghua Message:打开延迟补偿]---
+    程振宁--2025-03-06 15:33:00--MSG[sync pnc submodule---build P31_pnc_asw:main---<vmp change log>---Author:王亚伟 Message:VMP_2503060000_[E01J3-471]_1、修改comfort-exit模式下的规划加速度输出值的变化趋势；2、在comfort-exit模式下如果有ttc过小的危险工况报接管；3、将弯道限速中自车轨迹曲率限速值与车道线曲率限速值保持一致---<rlgs change log>---Author:Wangxinghua Message:车道左boundary剔除待转线]---
+    程振宁--2025-03-06 15:33:00--MSG[sync pnc submodule---build P31_pnc_asw:main---<rlgs change log>---Author:Wangxinghua Message:RLGS_2503060001_[E01J3-476]_匝道限速牌横向距离单独设置阈值]---
+    程振宁--2025-03-06 15:33:00--MSG[sync pnc submodule---build P31_pnc_asw:main---<vmc change log>---Author:li hang Message:VMC_2503060000_纵向控制增加ACC状态机为8的判断]---
+    songkunpeng--2025-03-06 22:02:16--MSG[VAL_2503060202_加速踏板信号更改为VCU_ONEBOX_11和功能安全保持一致，取消屏蔽EPB故障信号]---
+    songkunpeng--2025-03-06 20:44:28--MSG[VAL_2503060102_标定量默认LDP/LDW功能同时激活时方向盘震动]---
+    Yuan Xianbin--2025-03-06 09:54:19--MSG[[ver]upgrade to 01.02.01]---
+    Hulijie--2025-03-06 14:43:02--MSG[fix compensate for objects]---
+    songkunpeng--2025-03-06 11:12:41--MSG[VAL_2503060002_修复AEB双闪bug不请求bug]---
+    Yuan Xianbin--2025-03-06 10:01:52--MSG[[soc_utils][system_monitor]add data_collect and mmc into list]---
+    songkunpeng--2025-03-05 22:58:53--MSG[VAL_2503050102_方向盘角速度取方向盘角度低通滤波计算,更新a2l]---
+    程振宁--2025-03-05 21:01:56--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503050003 modify edr output]---
+    程振宁--2025-03-05 20:18:25--MSG[sync pnc submodule---build P31_pnc_asw:main---<las change log>---Author:姜宝祥 Message:Las_Version = 2503051940_将LDP曲率补偿限幅值改为标定量P_LSS_LDW_State_Param_LaneCurveMaxValue便于标定---<rlgs change log>---Author:Wangxinghua Message:道路消亡判断修改，计算最小车道宽度，且根据合流标识适当增大消亡阈值]---
+    程振宁--2025-03-05 19:51:22--MSG[sync pnc submodule---build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503050002 adapter ipb and edr data]---
+    程振宁--2025-03-05 19:29:59--MSG[sync pnc submodule---build P31_pnc_asw:main---<tos change log>---Author:任红美 Message:TOS_2503051900_[]_优化目标cutout判断逻辑]---
+    程振宁--2025-03-05 18:26:40--MSG[sync pnc submodule---build P31_pnc_asw:main---<vmp change log>---Author:王亚伟 Message:VMP_2503050003_[E01J3-446]_1、ACC在comfort-Exit模式时自车加减速jerk值分别设置为1和-1，并根据场景匹配comfort-Exit模式的coding值;2、ACC模式从override到激活时根据时间限制减速jerk;3、在跟停过程中如果跟车距离比期望距离小很多的场景中根据车速限制规划行驶距离（默认关闭]---
+    程振宁--2025-03-05 17:37:18--MSG[sync pnc submodule---build P31_pnc_asw:main---<rlgs change log>---Author:Wangxinghua Message:道路消亡判断修改，计算最小车道宽度，且根据宽体虚线适当增大消亡阈值]---
+    程振宁--2025-03-05 16:31:32--MSG[sync pnc submodule---build P31_pnc_asw:main---<vmc change log>---Author:li hang Message:VMC_2503050000_微调控制参数]---
+    程振宁--2025-03-05 15:45:20--MSG[sync pnc submodule---build P31_pnc_asw:main---<las change log>---Author:姜宝祥 Message:Las_Version = 2503051530_修改自车预测时间标定量P_LSS_LDW_TimeCompensatePre->0.23;修改预测LDW右侧车轮到车道线位置的公式]---
+    程振宁--2025-03-05 15:29:32--MSG[sync pnc submodule---build P31_pnc_asw:main---<tos change log>---Author:任红美 Message:Merge branch ~TOS05~ into ~main~---Author:姜宝祥 Message:debug---Author:姜宝祥 Message:Tos_Version = 2503051400_修改IES左侧oncoing抑制场景纵向距离最小限制---Author:姜宝祥 Message:Tos_Version = 2503051400_修改ELKoncoming目标纵向距离范围]---
+    程振宁--2025-03-05 13:53:35--MSG[sync pnc submodule---build P31_pnc_asw:main---<las change log>---Author:姜宝祥 Message:Las_Version = 2503051340_LDW灵敏度开关打开及修改灵敏度参数；LDW激活3秒抑制(不限制是否为相反侧)]---
+    程振宁--2025-03-05 03:49:46--MSG[sync pnc submodule---build P31_pnc_asw:main---<las change log>---Author:姜宝祥 Message:LAS_version = 2503050340_修改LDW的车轮到线距离------build P31_pnc_asw:main---<tos change log>---Author:任红美 Message:TOS_2503050225_[]_优化ACC选目标策略------build P31_pnc_asw:main---<rlgs change log>---Author:Wangxinghua Message:RLGS_2503050002_[E01J3-375]_调整前车轨迹与线贴合度差值，cover某侧线较短导致左右cost接近的情况---<tos change log>---Author:任红美 Message:Merge branch ~TOS0305~ into ~main~---Author:姜宝祥 Message:Tos_Version = 2503050200_修改IES躲闪结束过早、不躲闪问题以及躲闪侧危险判断------build P31_pnc_asw:main---<rlgs change log>---Author:Wangxinghua Message:1.当两侧线range足够长时不考虑长度偏差 2.dop时存在左右线依旧输出------build P31_pnc_asw:main---<vmp change log>---Author:王亚伟 Message:VMP_2503050002_无_只针对卡车过滤小幅度加减速值------build P31_pnc_asw:main---<vmp change log>---Author:王亚伟 Message:VMP_2503050001_无_1、针对大车目标，过滤小幅度的加减速变化值------build P31_pnc_asw:main---<aeb change log>---Author:王程 Message:AEB_Version 2503050001 modify ccrs high speed threthold offset------build P31_pnc_asw:main---<vmp change log>---Author:王亚伟 Message:VMP_2503050000_无_1、将自车standstill接入DecleToStop判断；2、将P_VMP_SafeStopEndDistLim改成45；3、关掉P0Range的补偿------build P31_pnc_asw:main---<icas change log>---Author:SamQiu Message:CSM_Version=2503040101_when sla status passive, clear sla spl range. Only when recognize next spl send spl info------build P31_pnc_asw:main---<hmi change log>---Author:谢新天 Message:HMI_25000304_修复LDP二级脱手声音]---
+    Hulijie--2025-03-05 01:29:53--MSG[compensate 300ms for stationary or stop objects]---
+    songkunpeng--2025-03-05 00:46:57--MSG[VAL_2503050002_添加方向盘激活ACCLCC标定量，默认使用新的按键方式，置1兼容老的方向盘按键，eps握手添加状态条件判断，脱手判断回退去除滤波]---
+    songkunpeng--2025-03-04 20:05:16--MSG[VAL_2503040002_更新雨刮FWiperSts 添加标定量默认只看雨刮，打开胎压信号，关闭ELK]---
+    程振宁--2025-03-04 17:29:52--MSG[sync pnc submodule---build P31_pnc_asw:main---<icas change log>---Author:姜宝祥 Message:Merge branch ~revert-b7b7b3c6~ into ~main~---Author:姜宝祥 Message:Revert "ICAS_Version=2503030101_when acc exit because of fast front wiper, inhibit 30s"]---
+    程振宁--2025-03-04 09:21:17--MSG[sync pnc submodule---build P31_pnc_asw:main---<tos change log>---Author:任红美 Message:debug goto from---Author:任红美 Message:TOS_2503041630_[]_1.非平行车道建模策略优化；2.目标cutin判断策略优化；]---
+    程振宁--2025-03-04 09:21:17--MSG[sync pnc submodule---build P31_pnc_asw:main---<rlgs change log>---Author:Wangxinghua Message:消亡车道取多点判断并放大阈值]---
+    Hulijie--2025-03-04 14:14:26--MSG[shield rear_corner_radar]---
+    Hulijie--2025-03-04 12:55:57--MSG[All belive vision_objects size for fusion_objects]---

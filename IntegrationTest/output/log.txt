@@ -1,0 +1,6 @@
+2025-03-18 08:57:27,374 INFO Need create CS Interface related for Val_WdgMAliveCall().
+2025-03-18 08:57:27,374 INFO Need create CS Interface related for Val_WdgMDdlStartCall().
+2025-03-18 08:57:27,374 INFO Need create CS Interface related for Val_WdgMDdlStopCall().
+2025-03-18 08:57:27,380 INFO Need create CS Interface related for FuSaMonitor_WdgMAliveCall().
+2025-03-18 08:57:27,380 INFO Need create CS Interface related for FuSaMonitor_WdgMDdlStartCall().
+2025-03-18 08:57:27,380 INFO Need create CS Interface related for FuSaMonitor_WdgMDdlStopCall().

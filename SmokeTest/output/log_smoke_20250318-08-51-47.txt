@@ -1,0 +1,461 @@
+Start testing...
+Started: 2025-03-18 08:51:47
+Step 1 DBC Analysis...
+Analyzer Dbc File Start...
+Analyzer Dbc File Done ...
+
+Step 2 Open Device...
+device handle:2686976
+Device Information:
+Hardware Version:V3.01
+Firmware Version:V2.46
+Driver Interface:V1.00
+Interface Interface:V0.00
+Interrupt Number:0
+CAN Number:2
+Serial:7D326B7DA0AF0A54E480
+Hardware Type:USBCANFD-200U
+
+
+Step 3 Open Channel...
+channel0 handle:2686976
+
+Step 4 Run Testcase...
+Loading TRACE32...
+Connecting TRACE32...
+Successfully established a remote connection with TRACE32 PowerView.
+Ping successfully
+
+****** TC 1 ******
+Core Running Test Start...
+PreCondition Set: None
+Step1: add variant
+Add Variant Success
+Step2: wait 1min
+Step3: check variant value
+PreCondition Reset: None
+Core Running Test Pass
+Core Running Test Done
+
+****** TC 2 ******
+CPU Load Test Start...
+PreCondition Set: None
+Step1: add variant
+Add Variant Success
+Step2: wait 2s
+Step3: check cpu load
+Max CPU Load:
+Core0: 39%
+Core1: 22%
+Core2: 23%
+Core3: 29%
+PreCondition Reset: None
+CPU Load Test Pass
+CPU Load Test Done
+
+****** TC 3 ******
+Stack Size Test Start...
+PreCondition Set: None
+Step1: add variant
+Add Variant Success
+Step2: wait 2s
+Step3: check stack size
+Max Used Stack Size:
+u8Core0_App_100ms: 37%
+u8Core0_App_10ms: 33%
+u8Core0_App_20ms: 80%
+u8Core0_App_500ms: 39%
+u8Core0_App_50ms: 37%
+u8Core0_App_5ms: 45%
+u8Core0_Bsw_10ms: 57%
+u8Core0_Bsw_1ms: 42%
+u8Core0_Bsw_20ms: 42%
+u8Core0_Bsw_5ms: 65%
+u8Core0_Swc_Init: 39%
+u8Core1_Aeb_20ms: 61%
+u8Core1_App_100ms: 3%
+u8Core1_App_10ms: 68%
+u8Core1_App_20ms: 58%
+u8Core1_App_40ms: 66%
+u8Core1_Bsw_10ms: 19%
+u8Core1_Swc_Init: 8%
+u8Core2_App_10ms: 8%
+u8Core2_App_40ms: 64%
+u8Core2_App_50ms: 1%
+u8Core2_BSW_30ms: 19%
+u8Core2_BSW_50ms: 35%
+u8Core2_Bsw_10ms: 30%
+u8Core2_Swc_Init: 17%
+u8Core3_Bsw_10ms: 16%
+u8Core3_Bsw_5ms: 49%
+u8Core3_Swc_Init: 35%
+u8Default_Init_Task: 39%
+u8Default_Init_Task_Core1: 35%
+u8Default_Init_Task_Core1_Trusted: 35%
+u8Default_Init_Task_Core2: 35%
+u8Default_Init_Task_Core2_Trusted: 35%
+u8Default_Init_Task_Core3: 35%
+u8Default_Init_Task_Core3_Trusted: 35%
+u8Default_Init_Task_Trusted: 39%
+u8IdleTask_OsCore0: 43%
+u8IdleTask_OsCore1: 22%
+u8IdleTask_OsCore2: 22%
+u8IdleTask_OsCore3: 22%
+PreCondition Reset: None
+Stack Size Test Pass
+Stack Size Test Done
+
+****** TC 4 ******
+ASW Version Test Start...
+PreCondition Set: None
+Step1: add variant
+Add Variant Success
+Step2: check ASW Version
+AEB_Version: 2503150002
+HMI_Version: 2503150000
+ICAS_Version: 2503150101
+LAS_Version: 2503151540
+RLGS_Version: 2503160001
+TOS_Version: 2503172120
+VMC_Version: 2503170000
+VME_Version: 2501062000
+VMP_Version: 2503140003
+VAL_Version: 2503170102
+PreCondition Reset: None
+ASW Version Test Pass
+ASW Version Test Done
+
+Record Messages Start
+Channel_Name: DA_CAN_CGM
+Record Messages Done
+
+****** TC 5 ******
+CANTx Period Test Start...
+Channel_Name: DA_CAN_CGM
+Message Name: ADS_COM_2
+Message Id: 0x314
+Cycle Time: 50ms
+Number Of Frame: 100
+Period Max: 50.0
+Period Min: 49.99
+Period Avg: 50.0
+Period Test Pass
+
+Message Name: ADS_COM_3
+Message Id: 0x31a
+Cycle Time: 50ms
+Number Of Frame: 100
+Period Max: 50.01
+Period Min: 49.99
+Period Avg: 50.0
+Period Test Pass
+
+Message Name: FCM_RemoteDiag
+Message Id: 0x503
+Cycle Time: 500ms
+Number Of Frame: 100
+Period Max: 500.09
+Period Min: 499.92
+Period Avg: 500.0
+Period Test Pass
+
+Message Name: NMm_FCM
+Message Id: 0x61d
+Cycle Time: 1000ms
+Number Of Frame: 100
+Period Max: 1000.05
+Period Min: 999.97
+Period Avg: 1000.01
+Period Test Pass
+
+Total Message: 4
+Pass: 4
+Fail: 0
+NA: 0
+CANTx Period Test Pass
+CANTx Period Test Done
+
+****** TC 6 ******
+CANTx DLC Test Start...
+Channel_Name: DA_CAN_CGM
+Message Name: ADS_COM_2
+Message Id: 0x314
+Data Length: 8
+Number Of Frame: 100
+DLC Max: 8
+DLC Min: 8
+DLC Test Pass
+
+Message Name: ADS_COM_3
+Message Id: 0x31a
+Data Length: 24
+Number Of Frame: 100
+DLC Max: 24
+DLC Min: 24
+DLC Test Pass
+
+Message Name: FCM_RemoteDiag
+Message Id: 0x503
+Data Length: 32
+Number Of Frame: 100
+DLC Max: 32
+DLC Min: 32
+DLC Test Pass
+
+Message Name: NMm_FCM
+Message Id: 0x61d
+Data Length: 8
+Number Of Frame: 100
+DLC Max: 8
+DLC Min: 8
+DLC Test Pass
+
+Total Message: 4
+Pass: 4
+Fail: 0
+NA: 0
+CANTx DLC Test Pass
+CANTx DLC Test Done
+
+****** TC 7 ******
+CANTx Unused Bit Test Start...
+Channel_Name: DA_CAN_CGM
+Message Name: ADS_COM_2
+Message Id: 0x314
+Number Of Frame: 100
+Unused Bit Test Pass
+
+Message Name: ADS_COM_3
+Message Id: 0x31a
+Number Of Frame: 100
+Unused Bit Test Pass
+
+Message Name: FCM_RemoteDiag
+Message Id: 0x503
+Number Of Frame: 100
+Unused Bit Test Pass
+
+Message Name: NMm_FCM
+Message Id: 0x61d
+Number Of Frame: 100
+Unused Bit Test Pass
+
+Total Message: 4
+Pass: 4
+Fail: 0
+NA: 0
+CANTx Unused Bit Test Pass
+CANTx Unused Bit Test Done
+
+****** TC 8 ******
+CANTx Cnt&CRC Test Start...
+Channel_Name: DA_CAN_CGM
+Message Name: ADS_COM_2
+Message Id: 0x314
+Support Cnt&CRC
+Number Of Frame: 100
+Cnt&CRC Test Pass
+
+Message Name: ADS_COM_3
+Message Id: 0x31a
+Support Cnt&CRC
+Number Of Frame: 100
+Cnt&CRC Test Pass
+
+Message Name: FCM_RemoteDiag
+Message Id: 0x503
+Unsupport Cnt&CRC
+
+Message Name: NMm_FCM
+Message Id: 0x61d
+Unsupport Cnt&CRC
+
+Total Message: 4
+Pass: 2
+Fail: 0
+NA: 2
+CANTx Cnt&CRC Test Pass
+CANTx Cnt&CRC Test Done
+
+DoIP Connect...
+Sending DoIP Message: Type: 0x5, Payload Size: 11, Payload: 0E 80 00 00 00 00 00 00 00 00 0B
+Received DoIP Message. Type: 0x6, Payload Size: 13 bytes, Payload: 0E 80 04 10 10 00 00 00 00 FF FF FF FF
+
+****** TC 9 ******
+DCM CommunicationControl Test Start...
+PreCondition Set: None
+Step1: send 10 03
+Sending DoIP Message: Type: 0x8001, Payload Size: 6, Payload: 0E 80 04 10 10 03
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 10 78
+Received DoIP Message. Type: 0x8001, Payload Size: 10 bytes, Payload: 04 10 0E 80 50 03 00 32 01 F4
+Step2: send 28 03 03
+Sending DoIP Message: Type: 0x8001, Payload Size: 7, Payload: 0E 80 04 10 28 03 03
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 28 78
+Received DoIP Message. Type: 0x8001, Payload Size: 6 bytes, Payload: 04 10 0E 80 68 03
+Step3: check tx message
+Stop communication success
+Step4: send 28 00 03
+Sending DoIP Message: Type: 0x8001, Payload Size: 7, Payload: 0E 80 04 10 28 00 03
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 6 bytes, Payload: 04 10 0E 80 68 00
+Step5: check tx message
+Start communication success
+PreCondition Reset: None
+DCM CommunicationControl Test Pass
+DCM CommunicationControl Test Done
+
+****** TC 10 ******
+DCM ReadDataByIdentifier Test Start...
+PreCondition Set: None
+Step1: send 22 F1 89 to read Vehicle Manufacturer ECU version
+Sending DoIP Message: Type: 0x8001, Payload Size: 7, Payload: 0E 80 04 10 22 F1 89
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 22 78
+Received DoIP Message. Type: 0x8001, Payload Size: 31 bytes, Payload: 04 10 0E 80 62 F1 89 35 30 2E 30 37 2E 31 36 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20
+Version is: 50.07.16                
+Step2: send 22 F1 95 to read System Supplier ECU version
+Sending DoIP Message: Type: 0x8001, Payload Size: 7, Payload: 0E 80 04 10 22 F1 95
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 22 78
+Received DoIP Message. Type: 0x8001, Payload Size: 16 bytes, Payload: 04 10 0E 80 62 F1 95 52 30 31 2E 30 33 2E 30 35
+Version is: R01.03.05
+Step3: send 22 F0 32 to read cal version
+Sending DoIP Message: Type: 0x8001, Payload Size: 7, Payload: 0E 80 04 10 22 F0 32
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 22 78
+Received DoIP Message. Type: 0x8001, Payload Size: 31 bytes, Payload: 04 10 0E 80 62 F0 32 35 30 2E 31 36 2E 30 31 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20
+Version is: 50.16.01                
+Step4: send 10 03
+Sending DoIP Message: Type: 0x8001, Payload Size: 6, Payload: 0E 80 04 10 10 03
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 10 78
+Received DoIP Message. Type: 0x8001, Payload Size: 10 bytes, Payload: 04 10 0E 80 50 03 00 32 01 F4
+Step5: send 31 01 02 03
+Sending DoIP Message: Type: 0x8001, Payload Size: 8, Payload: 0E 80 04 10 31 01 02 03
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 31 78
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 31 78
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 31 78
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 31 78
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 31 78
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 31 78
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 31 78
+Received DoIP Message. Type: 0x8001, Payload Size: 9 bytes, Payload: 04 10 0E 80 71 01 02 03 00
+Step6: send 10 02
+Sending DoIP Message: Type: 0x8001, Payload Size: 6, Payload: 0E 80 04 10 10 02
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 10 bytes, Payload: 04 10 0E 80 50 02 00 32 01 F4
+Step7: send 22 F1 80 to read boot version
+Sending DoIP Message: Type: 0x8001, Payload Size: 7, Payload: 0E 80 04 10 22 F1 80
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 39 bytes, Payload: 04 10 0E 80 62 F1 80 52 42 30 2E 31 30 2E 30 30 2E 31 37 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20
+Version is: RB0.10.00.17                    
+PreCondition Reset: Enter default session
+Sending DoIP Message: Type: 0x8001, Payload Size: 6, Payload: 0E 80 04 10 10 01
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 10 78
+Received DoIP Message. Type: 0x8001, Payload Size: 10 bytes, Payload: 04 10 0E 80 50 01 00 32 01 F4
+DCM ReadDataByIdentifier Test Pass
+DCM ReadDataByIdentifier Test Done
+
+****** TC 11 ******
+NVM VIN Code Test Start...
+PreCondition Set: None
+Step1: send 10 03
+Sending DoIP Message: Type: 0x8001, Payload Size: 6, Payload: 0E 80 04 10 10 03
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 10 bytes, Payload: 04 10 0E 80 50 03 00 32 01 F4
+Step2: send 27 01/02 to unlock
+Sending DoIP Message: Type: 0x8001, Payload Size: 6, Payload: 0E 80 04 10 27 01
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 22 bytes, Payload: 04 10 0E 80 67 01 67 EC 7B 1A EE 2B 5A 05 4F CB 54 13 75 38 66 DC
+Sending DoIP Message: Type: 0x8001, Payload Size: 22, Payload: 0E 80 04 10 27 02 25 83 F0 55 5F 5E 73 FE 01 53 0E 6E 59 18 04 4E
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 6 bytes, Payload: 04 10 0E 80 67 02
+Step3: send 2E F1 90 01*17
+Sending DoIP Message: Type: 0x8001, Payload Size: 24, Payload: 0E 80 04 10 2E F1 90 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 6E F1 90
+Step4: send 22 F1 90
+Sending DoIP Message: Type: 0x8001, Payload Size: 7, Payload: 0E 80 04 10 22 F1 90
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 24 bytes, Payload: 04 10 0E 80 62 F1 90 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01
+Step5: Battery off and on
+Step6: send 22 F1 90
+Sending DoIP Message: Type: 0x8001, Payload Size: 7, Payload: 0E 80 04 10 22 F1 90
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 22 78
+Received DoIP Message. Type: 0x8001, Payload Size: 24 bytes, Payload: 04 10 0E 80 62 F1 90 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01
+Step7: send 10 03
+Sending DoIP Message: Type: 0x8001, Payload Size: 6, Payload: 0E 80 04 10 10 03
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 10 78
+Received DoIP Message. Type: 0x8001, Payload Size: 10 bytes, Payload: 04 10 0E 80 50 03 00 32 01 F4
+Step8: send 27 01/02 to unlock
+Sending DoIP Message: Type: 0x8001, Payload Size: 6, Payload: 0E 80 04 10 27 01
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 22 bytes, Payload: 04 10 0E 80 67 01 01 7E 21 79 6D 20 93 DC 41 39 81 00 77 0A D1 A4
+Sending DoIP Message: Type: 0x8001, Payload Size: 22, Payload: 0E 80 04 10 27 02 C5 C1 D1 4C 86 5C 8F 36 CA 29 78 74 02 EE 88 0C
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 6 bytes, Payload: 04 10 0E 80 67 02
+Step9: send 2E F1 90 02*17
+Sending DoIP Message: Type: 0x8001, Payload Size: 24, Payload: 0E 80 04 10 2E F1 90 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 7F 2E 78
+Received DoIP Message. Type: 0x8001, Payload Size: 7 bytes, Payload: 04 10 0E 80 6E F1 90
+Step10: send 22 F1 90
+Sending DoIP Message: Type: 0x8001, Payload Size: 7, Payload: 0E 80 04 10 22 F1 90
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 24 bytes, Payload: 04 10 0E 80 62 F1 90 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02
+Step11: Battery off and on
+Step12: send 22 F1 90
+Sending DoIP Message: Type: 0x8001, Payload Size: 7, Payload: 0E 80 04 10 22 F1 90
+Received DoIP Message. Type: 0x8002, Payload Size: 5 bytes, Payload: 04 10 0E 80 00
+Received DoIP Message. Type: 0x8001, Payload Size: 24 bytes, Payload: 04 10 0E 80 62 F1 90 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02
+PreCondition Reset: None
+NVM VIN Code Test Pass
+NVM VIN Code Test Done
+
+****** TC 12 ******
+NM IDRange Test Start...
+PreCondition Set: KL30 ON and KL15 OFF
+Wait 5s
+PreCondition check success
+Step1: send NM message:id=0x600,dlc=1
+Close Channel0 success! 
+Step2: check network status
+Network wakeup success
+Step3: stop NM message
+Wait 5s
+Step4: check network status
+Network sleep success
+Step5: send NM message:id=0x67F,dlc=8
+Close Channel0 success! 
+Step6: check network status
+Network wakeup success
+Step7: stop NM message
+Wait 5s
+Step8: check network status
+Network sleep success
+PreCondition Reset: KL30 ON and KL15 ON
+Wait 2s
+NM IDRange Test Pass
+NM IDRange Test Done
+
+Test Result:
+Total: 12
+Pass: 12
+Fail: 0
+
+Run Testcase Finished
+
+Step 5 Close Channel...
+Close Channel0 success! 
+
+Step 6 Close Device...
+Close Device success! 
+
+Finished
+Ended: 2025-03-18 08:57:11
