@@ -1,2 +1,0 @@
-call curl.exe -sO http://10.113.135.20:8080/jnlpJars/agent.jar
-java -jar agent.jar -url http://10.113.135.20:8080/ -secret 66b8d670a84924d98fbe765ad33fe72dc38c62020c78c994cae2c9dafe6dbfda -name "3.1-test" -workDir "D:\jenkins"

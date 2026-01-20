@@ -1,1 +1,0 @@
-call C:\T32\bin\windows64\t32mv800.exe -c C:\T32\config.t32 -s .\rh850.cmm
