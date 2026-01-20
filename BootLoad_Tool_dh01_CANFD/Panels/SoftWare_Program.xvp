@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<Panel Type="Vector.CANalyzer.Panels.PanelSerializer, Vector.CANalyzer.Panels.Serializer, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null">
+  <Object Type="Vector.CANalyzer.Panels.Runtime.Panel, Vector.CANalyzer.Panels.Common, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="Panel" Children="Controls" ControlName="SoftWare_Program">
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl1" Children="Controls" ControlName="StaticTextControl1">
+      <Property Name="Name">StaticTextControl1</Property>
+      <Property Name="Size">159, 23</Property>
+      <Property Name="Location">214, 24</Property>
+      <Property Name="Font">Microsoft Sans Serif, 14pt</Property>
+      <Property Name="TextAlign">MiddleCenter</Property>
+      <Property Name="Text">东风在线更新程序</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.HexEditorControl, Vector.CANalyzer.Panels.CommonControls, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="HexEditorControl2" Children="Controls" ControlName="HexEditorControl2">
+      <Property Name="Name">HexEditorControl2</Property>
+      <Property Name="Size">248, 320</Property>
+      <Property Name="Location">436, 74</Property>
+      <Property Name="ColumnCount">30</Property>
+      <Property Name="ViewLayout">OnlyTextfield</Property>
+      <Property Name="SymbolDataType">String</Property>
+      <Property Name="SymbolConfiguration">4;16;DownLoad;;;sysPromptMessage;4;;;-1</Property>
+      <Property Name="TabIndex">4</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl2" Children="Controls" ControlName="GroupBoxControl2">
+      <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl3" Children="Controls" ControlName="ButtonControl2">
+        <Property Name="Name">ButtonControl3</Property>
+        <Property Name="Size">82, 23</Property>
+        <Property Name="Location">223, 34</Property>
+        <Property Name="Text">停止下载</Property>
+        <Property Name="UseWindowsStyle">False</Property>
+        <Property Name="UseTransparentColor">False</Property>
+        <Property Name="SymbolConfiguration">4;16;DownLoad;;;sysStopDownload;1;;;-1</Property>
+        <Property Name="TabIndex">2</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl2" Children="Controls" ControlName="ButtonControl2">
+        <Property Name="Name">ButtonControl2</Property>
+        <Property Name="Size">82, 23</Property>
+        <Property Name="Location">123, 34</Property>
+        <Property Name="Text">重新下载</Property>
+        <Property Name="UseWindowsStyle">False</Property>
+        <Property Name="UseTransparentColor">False</Property>
+        <Property Name="SymbolConfiguration">4;16;DownLoad;;;sysRestartDownload;1;;;-1</Property>
+        <Property Name="TabIndex">2</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl1" Children="Controls" ControlName="ButtonControl1">
+        <Property Name="Name">ButtonControl1</Property>
+        <Property Name="Size">88, 23</Property>
+        <Property Name="Location">22, 34</Property>
+        <Property Name="Text">开始下载</Property>
+        <Property Name="UseTransparentColor">False</Property>
+        <Property Name="SymbolConfiguration">4;16;DownLoad;;;sysStartDownload;1;;;-1</Property>
+        <Property Name="TabIndex">2</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.ProgressBarControl, Vector.CANalyzer.Panels.CommonControls, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="ProgressBarControl1" Children="Controls" ControlName="ProgressBarControl1">
+        <Property Name="Name">ProgressBarControl1</Property>
+        <Property Name="Size">263, 36</Property>
+        <Property Name="Location">19, 82</Property>
+        <Property Name="ValueForeColor">Green</Property>
+        <Property Name="ValueBackColor">WhiteSmoke</Property>
+        <Property Name="OriginValue">0</Property>
+        <Property Name="ValuePos">Top</Property>
+        <Property Name="BarBackColor">WhiteSmoke</Property>
+        <Property Name="ValueSize">263, 13</Property>
+        <Property Name="SymbolConfiguration">4;16;DownLoad;;;sysDownloadProcessInd;1;;;-1</Property>
+      </Object>
+      <Property Name="Name">GroupBoxControl2</Property>
+      <Property Name="Size">352, 138</Property>
+      <Property Name="Location">69, 232</Property>
+      <Property Name="Text">开始程序下载</Property>
+      <Property Name="TabIndex">5</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl1" Children="Controls" ControlName="GroupBoxControl1">
+      <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl1" Children="Controls" ControlName="TextBoxControl2">
+        <Property Name="Name">TextBoxControl1</Property>
+        <Property Name="Size">138, 28</Property>
+        <Property Name="Location">17, 53</Property>
+        <Property Name="AlarmUpperTextColor">WindowText</Property>
+        <Property Name="ValueDecimalPlaces">0</Property>
+        <Property Name="AlarmLowerBkgColor">WhiteSmoke</Property>
+        <Property Name="ValueDisplay">Hexadecimal</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">WindowText</Property>
+        <Property Name="AlarmGeneralSettings">1;2;0;16777216</Property>
+        <Property Name="DisplayLabel">Left</Property>
+        <Property Name="DescriptionText">ProcedureSize:</Property>
+        <Property Name="BoxBorderStyle">FixedSingle</Property>
+        <Property Name="DescriptionSize">91, 20</Property>
+        <Property Name="UsedValueTable">PhysicalValue</Property>
+        <Property Name="SymbolConfiguration">5;16;ReadFile;;;sysDrvFileLength;1;;;-1;;;</Property>
+        <Property Name="TabIndex">6</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.PathControl, Vector.CANalyzer.Panels.CommonControls, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="PathControl2" Children="Controls" ControlName="PathControl1">
+        <Property Name="Name">PathControl2</Property>
+        <Property Name="Size">303, 29</Property>
+        <Property Name="Location">17, 20</Property>
+        <Property Name="DlgTitle">aaa</Property>
+        <Property Name="FileDlgFilter">Hex files(*.hex;*.s19;*.mhx)|*.mhx;*.hex;*.s19;*.bin</Property>
+        <Property Name="SymbolConfiguration">5;16;ReadFile;;;sysDrvFilePath;4;;;-1;;;</Property>
+        <Property Name="TabIndex">5</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl2" Children="Controls" ControlName="TextBoxControl2">
+        <Property Name="Name">TextBoxControl2</Property>
+        <Property Name="Size">138, 28</Property>
+        <Property Name="Location">18, 112</Property>
+        <Property Name="AlarmUpperTextColor">WindowText</Property>
+        <Property Name="ValueDecimalPlaces">0</Property>
+        <Property Name="AlarmLowerBkgColor">WhiteSmoke</Property>
+        <Property Name="ValueDisplay">Hexadecimal</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">WindowText</Property>
+        <Property Name="AlarmGeneralSettings">1;2;0;16777216</Property>
+        <Property Name="DisplayLabel">Left</Property>
+        <Property Name="DescriptionText">ProcedureSize:</Property>
+        <Property Name="BoxBorderStyle">FixedSingle</Property>
+        <Property Name="DescriptionSize">91, 20</Property>
+        <Property Name="UsedValueTable">PhysicalValue</Property>
+        <Property Name="SymbolConfiguration">4;16;ReadFile;;;sysCodeFileLength;1;;;-1</Property>
+        <Property Name="TabIndex">4</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.PathControl, Vector.CANalyzer.Panels.CommonControls, Version=12.0.75.0, Culture=neutral, PublicKeyToken=null" Name="PathControl1" Children="Controls" ControlName="PathControl1">
+        <Property Name="Name">PathControl1</Property>
+        <Property Name="Size">303, 29</Property>
+        <Property Name="Location">17, 87</Property>
+        <Property Name="DlgTitle">aaa</Property>
+        <Property Name="FileDlgFilter">Hex files(*.hex;*.s19;*.mhx)|*.mhx;*.hex;*.s19;*.bin</Property>
+        <Property Name="SymbolConfiguration">4;16;ReadFile;;;sysCodeFilePath;4;;;-1</Property>
+        <Property Name="TabIndex">2</Property>
+      </Object>
+      <Property Name="Name">GroupBoxControl1</Property>
+      <Property Name="Size">352, 139</Property>
+      <Property Name="Location">69, 74</Property>
+      <Property Name="Text">读取程序文件</Property>
+      <Property Name="TabIndex">6</Property>
+    </Object>
+    <Property Name="Name">Panel</Property>
+    <Property Name="Size">678, 421</Property>
+    <Property Name="BorderStyle">Fixed3D</Property>
+  </Object>
+</Panel>

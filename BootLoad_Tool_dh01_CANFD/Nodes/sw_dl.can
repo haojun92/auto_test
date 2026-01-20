@@ -1,0 +1,927 @@
+
+includes
+{
+  #include "crc.can"
+  #include "ReadFile.cin"
+}
+variables
+{
+//    char cout = 0;
+//    byte DataStr[512][1024];
+//    byte DataStrhd[256][6];   
+//    dword DataBlockAddr[256];
+//    dword DataBlockLength[256];
+//    int DataBlockStartIndex[256];
+//    int DataBlockTotalNum;
+//   
+//    int DataCurrPos = 0;
+//    int DataCurrIndex = 0;
+//    dword DataCurrAddr = 0;
+//    dword DataTotalLen = 0;
+//    int DataBlockIndex = 0;
+//    dword DataPageAddr;  
+//  
+//    byte DrvStr[256][1024];
+//    dword DrvBlockAddr[10];
+//    dword DrvBlockLength[10];
+//    int DrvBlockStartIndex[10];
+//    int DrvBlockTotalNum;
+//
+//    dword CurrentTotalLen;
+//    int DrvCurrPos = 0;
+//    int DrvCurrIndex = 0;
+//    dword DrvCurrAddr = 0;
+//    dword DrvTotalLen = 0;
+//    int DrvBlockIndex = 0;
+//    dword DrvPageAddr = 0;  
+//    
+//    byte HexDataArray[100]; 
+//    int read_seg = 0;
+//    int total_seg, seg_index;
+//    int actual_seg = 0;
+//    dword file_checksum;
+//    dword SectionTotalChecksum;
+//    char DisplayStr[100];
+//    char data_index,data_len;
+//    char seg_is_gonging;
+//    long DisplayLength = 0;
+//    byte SectionSentCount = 0; 
+//    byte SectionSentIndex = 0;
+//  
+//    
+//    byte gAddressingMode = 0;
+//    byte temp1=0;
+//    byte temp2=0;
+//    dword glbHandle =0;
+//    char sourceFile[200];
+//
+//    char S19FileName[50];
+//    char S19FilePath[150];
+//    
+//    char IsDrvFileValid = 0;
+//    char IsCodeFileValid = 0;
+//    char IsDrvFileNeed;
+    char IsDrvFileDownload;
+    dword file_checksum;
+//    char download_is_doing = 0;
+//       
+//    char TestStr[200];    
+//    //byte gTxDataBuffer[1024];
+//    char gECU[16] = "Desaysv BIC R&D";
+   enum gCondition{RxSize = 4098, TxSize = 4096};
+
+    byte CurrentBlockIndex;
+    dword CurrentBlockCnt;
+    dword TransferBlockSize;
+    int CurrentTransIndex;
+    int CurrBlock;
+    int CurrPos;
+    byte gRxDataBuffer[RxSize];
+    byte gTxDataBuffer[TxSize];
+    long txCount = 0;
+    byte SecurityKey[4];
+    byte SecuritySeed[4];
+    char gCaplRxStrBuffer[4098]; 
+
+    long tm[9];
+    char TimeDateStr[4];
+    
+    char Diag_State = 0;
+
+    enum DiagStatusType
+    { 
+      DiagNone = 0,
+      ReadECUHardwareNumber = 1,
+      ReadBootSoftwareIdentification =2,
+      StartExtendedSession = 3,
+      DisableDTCstorage =4,
+      DisableNMAndCommunicationMessage =5,
+      StartReProgramSection = 10,
+      RequestSecuritySeed = 11,
+      SendSecurityKey = 12,
+      WriteDownloadIdentifierNum =13,
+      WriteDownloadDate = 14,
+      StartEraseMemoryProcedure =15,
+      RequestDownload = 16,
+      TransferDataBlock = 17,
+      StopTransferData = 18,
+      SetCalculateChecksum = 19,
+      CheckProgramDependency =20,
+      RequestResetMcu = 21, 
+      DownloadFinished = 22,
+      ChangeToExtendedSession = 31,
+      EnableDiagnosticCommunication = 32,
+      EnableDTCstorage =33,
+      ChangeToDefaultSession=34
+      };
+    enum DiagStatusType Diag_Status;
+    
+}
+
+
+
+
+
+void CalcuteTheDateTime(void)
+{
+   // now tm contains the following entries:
+  // tm[0] = 3; (seconds)
+  // tm[1] = 51; (minutes)
+  // tm[2] = 16; (hours)
+  // tm[3] = 21; (day of month)
+  // tm[4] = 7; (month stating with 0)
+  // tm[5] = 98; (year)
+  // tm[6] = 5; (weekday)
+  // tm[7] = 232;(day of year)
+  // tm[8] = 1; (Summer time)
+  long yearstr;
+  yearstr = tm[5]-100;
+  TimeDateStr[0]= 0x20;
+  TimeDateStr[1]= (yearstr/10)*16+ (yearstr%10);
+  TimeDateStr[2] = ((tm[4]+1)/10)*16 + ((tm[4]+1)%10);
+  TimeDateStr[3] = (tm[3]/10)*16 + (tm[3]%10);
+}
+
+on timer tm2
+{
+    int i;
+}
+
+
+void FunDiagRequest()
+{ 
+    word Seed;
+    word SeedKey;
+   // Diag_Res = this;
+    switch(Diag_State)
+    {
+      case ReadECUHardwareNumber:
+        DiagReadECUHardwareNumberResp();
+        break;
+      case ReadBootSoftwareIdentification:
+        DiagReadBootSoftwareIdentificationResp();
+        break;
+      case StartExtendedSession:
+       DiagStartExtendedSession(); 
+        break;
+      case DisableDTCstorage:
+       DiagDisableDTCstorageResp(); 
+        break;
+      case DisableNMAndCommunicationMessage:
+       DiagDisableNMAndCommunicationMessageResp(); 
+        break;
+        
+      case ChangeToExtendedSession:
+       DiagChangeToExtendedSession(); 
+        break;
+      case EnableDiagnosticCommunication:
+       DiagEnableDiagnosticCommunicationResp(); 
+        break;
+      case EnableDTCstorage:
+       DiagEnableDTCstorageResp(); 
+        break;
+      case ChangeToDefaultSession:
+       DiagChangeToDefaultSessionResp(); 
+        break;
+        default :
+        break;
+    }
+}
+
+
+
+
+
+void DiagReadECUHardwareNumber(void)
+{
+    Diag_State = ReadECUHardwareNumber;
+    gTxDataBuffer[0] = 0x22;
+    gTxDataBuffer[1] = 0xF1;
+    gTxDataBuffer[2] = 0x93;
+    txCount = 3;
+}
+
+
+void DiagReadECUHardwareNumberResp(void)
+{  
+
+}
+
+void DiagReadBootSoftwareIdentification(void)
+{
+    Diag_State = ReadBootSoftwareIdentification;  
+    gTxDataBuffer[0] = 0x22;
+    gTxDataBuffer[1] = 0xF1;
+    gTxDataBuffer[2] = 0x80;
+    txCount = 3;
+    Diag_SendDataReq(gTxDataBuffer, txCount);
+}
+
+void DiagReadBootSoftwareIdentificationResp(void)
+{  
+    if((gTxDataBuffer[0] == 0x62)&&(gRxDataBuffer[2] == 0xF1)&&(gRxDataBuffer[3] == 0x80))
+    {
+        DiagStartExtendedSession();
+    }
+}
+
+
+
+void DiagStartExtendedSession(void)
+{
+    Diag_State = StartExtendedSession;   
+    gTxDataBuffer[0] = 0x10;
+    gTxDataBuffer[1] = 0x03;
+    txCount = 2;
+    Diag_SendDataReq(gTxDataBuffer, txCount);   
+}
+
+void DiagStartExtendedSessionResp(void)
+{  
+    if((gRxDataBuffer[1] == 0x50)&&(gRxDataBuffer[2] == 0x03))
+    {
+        DiagDisableDTCstorage();   
+    }
+}
+
+
+void DiagDisableDTCstorage(void)
+{
+    Diag_State = DisableDTCstorage;   
+    Diag_Res.Diag_D1 = 0x85;
+    gTxDataBuffer[1] = 0x02;
+    txCount = 2;
+    Diag_SendDataReq(gTxDataBuffer, txCount);      
+}
+
+void DiagDisableDTCstorageResp(void)
+{  
+    if((Diag_Res.Diag_D1 == 0xc5)&&(Diag_Res.Diag_D2 == 0x02))
+    {
+       DiagDisableNMAndCommunicationMessage(); 
+    }
+}
+
+void DiagDisableNMAndCommunicationMessage(void)
+{
+    Diag_State = DisableNMAndCommunicationMessage;   
+    gTxDataBuffer[0] = 0x28;
+    gTxDataBuffer[1] = 0x01;
+    gTxDataBuffer[2] = 0x01;
+    txCount = 3;
+    Diag_SendDataReq(gTxDataBuffer, txCount);   
+}
+
+void DiagDisableNMAndCommunicationMessageResp(void)
+{
+    if((gRxDataBuffer[1] == 0x68)&&(gRxDataBuffer[2] == 0x01))
+    {
+       //DiagStartReprogramSection(); 
+    }
+}
+
+void DiagChangeToExtendedSession(void)
+{
+    Diag_State = ChangeToExtendedSession;   
+    gTxDataBuffer[0] = 0x10;
+    gTxDataBuffer[1] = 0x03;
+    txCount = 2;
+    Diag_SendDataReq(gTxDataBuffer, txCount);   
+}
+
+void DiagChangeToExtendedSessionResp(void)
+{  
+    if((gRxDataBuffer[1]== 0x50)&&(gRxDataBuffer[3] == 0x03))
+    {
+        DiagDisableDTCstorage();   
+    }
+}
+
+void DiagEnableDiagnosticCommunication(void)
+{
+    Diag_State = EnableDiagnosticCommunication;   
+    gTxDataBuffer[0] = 0x28;
+    gTxDataBuffer[1] = 0x00;
+    gTxDataBuffer[2] = 0x01;
+    txCount = 3;
+    Diag_SendDataReq(gTxDataBuffer, txCount);   
+    
+}
+
+
+
+void DiagEnableDiagnosticCommunicationResp(void)
+{
+    if((gRxDataBuffer[1] == 0x68)&&(gRxDataBuffer[2] == 0x00))
+    {
+       //DiagStartReprogramSection(); 
+    } 
+}
+
+void DiagEnableDTCstorage(void)
+{
+    Diag_State = EnableDTCstorage;   
+    gTxDataBuffer[0] = 0x85;
+    gTxDataBuffer[1] = 0x01;
+    txCount = 2;
+    Diag_SendDataReq(gTxDataBuffer, txCount);    
+}
+
+void DiagEnableDTCstorageResp(void)
+{
+    if((gRxDataBuffer[1] == 0xC5)&&(gRxDataBuffer[2] == 0x01))
+    {
+       //DiagStartReprogramSection(); 
+    } 
+}
+
+void DiagChangeToDefaultSession(void)
+{
+    Diag_State = ChangeToDefaultSession;   
+    gTxDataBuffer[0] = 0x10;
+    gTxDataBuffer[1] = 0x01;
+    txCount = 2;
+    Diag_SendDataReq(gTxDataBuffer, txCount);   
+}
+
+void DiagChangeToDefaultSessionResp(void)
+{  
+    if((gRxDataBuffer[1] == 0x50)&&(gRxDataBuffer[2] == 0x01))
+    {
+        write("the download had finish and communication resumed");   
+    }
+}
+
+void DiagMessageResp()
+{
+  long txCount; 
+  write("the diagstatus is %X",Diag_Status);
+  switch(Diag_Status)
+  {
+    case StartReProgramSection:
+        DiagStartReprogramSectionResp(); 
+      break;
+      case RequestSecuritySeed:
+        write("Seed is received!");
+        DiagRequestSecuritySeedResp();
+      break;
+      case SendSecurityKey:
+        DiagSendSecurityKeyResp();
+      break;
+      case WriteDownloadIdentifierNum:
+         DiagWriteProgramSerialNumResp();
+      break;
+      case WriteDownloadDate:
+      DiagWriteProgramDateResp();
+      break;
+      case StartEraseMemoryProcedure:
+      DiagEraseFlashSectorResp();
+      break;
+      case RequestDownload:
+      DiagRequestDownloadDataResp();
+      break;
+      case TransferDataBlock:
+      DiagTransferDataResp();
+      break;
+      case StopTransferData:
+      DiagStopTransferDataResp();
+      break;
+     case SetCalculateChecksum:
+      DiagCheckFileChecksumResp();
+      break;
+      case CheckProgramDependency:
+      DiagCheckProgramDependencyResp();
+      break;
+      case RequestResetMcu:
+      DiagResetMcuResp();
+      break;
+    default:
+      break;
+  }
+  
+}
+
+void DiagStartReprogramSection(void)
+{
+    Diag_Status = StartReProgramSection;
+//    IsDiagWaitResp = 1;   
+    gTxDataBuffer[0] = 0x10;
+    gTxDataBuffer[1] = 0x02;
+    txCount = 2;
+    OSEKTL_DataReq(gTxDataBuffer, txCount);
+    
+}
+
+void DiagStartReprogramSectionResp(void)
+{
+   write("data0 is 0x%X, data1 is 0x%X",gRxDataBuffer[0],gRxDataBuffer[1]);
+  if((gRxDataBuffer[0] == 0x50)&&(gRxDataBuffer[1]== 0x02))
+    {
+      DiagRequestSecuritySeed();
+      //write("data0 is 0x%X, data1 is 0x%X",gRxDataBuffer[0],gRxDataBuffer[1]); 
+    }
+    else
+    {
+      //DiagStartReprogramSection();
+    }
+}
+void DiagRequestSecuritySeed(void)
+{
+    Diag_Status = RequestSecuritySeed;
+//    IsDiagWaitResp = 1;
+    gTxDataBuffer[0] = 0x27;
+    gTxDataBuffer[1] = 0x11;
+    txCount = 2;
+    OSEKTL_DataReq(gTxDataBuffer, txCount);
+    write("Request Seed!");
+}
+
+void DiagRequestSecuritySeedResp(void)
+{
+    if((gRxDataBuffer[0] == 0x67)&&(gRxDataBuffer[1]== 0x11))
+    {
+      write("Seed resp is right!");
+      SecuritySeed[0] = gRxDataBuffer[2];
+      SecuritySeed[1] = gRxDataBuffer[3];
+      SecuritySeed[2] = gRxDataBuffer[4];
+      SecuritySeed[3] = gRxDataBuffer[5];
+      DiagSendSecurityKey();
+      write("Seed key is send!");
+    }
+}
+
+void DiagSendSecurityKey(void)
+{
+    Diag_Status = SendSecurityKey;
+//    IsDiagWaitResp = 1;
+    gTxDataBuffer[0] = 0x27;
+    gTxDataBuffer[1] = 0x12;
+    gTxDataBuffer[2] = SecurityKey[0];
+    gTxDataBuffer[3] = SecurityKey[1];
+    gTxDataBuffer[4] = SecurityKey[2];
+    gTxDataBuffer[5] = SecurityKey[3];
+    txCount = 6;
+    OSEKTL_DataReq(gTxDataBuffer, txCount);
+}
+
+void DiagSendSecurityKeyResp(void)
+{
+    if((gRxDataBuffer[0] == 0x67)&&(gRxDataBuffer[1]== 0x12))
+    {
+        DiagWriteProgramSerialNum();
+    }
+}
+
+void DiagWriteProgramSerialNum(void)
+{
+    long i=0;
+    Diag_Status = WriteDownloadIdentifierNum;
+//    IsDiagWaitResp = 1;
+    gTxDataBuffer[0] = 0x2E;
+    gTxDataBuffer[1] = 0xF1;
+    gTxDataBuffer[2] = 0x98;
+    for(i=0;i<16;i++)
+    {
+      gTxDataBuffer[i+3] = gECU[i];
+    }
+    txCount = 19;
+    OSEKTL_DataReq(gTxDataBuffer, txCount);
+}
+
+void DiagWriteProgramSerialNumResp(void)
+{
+    if((gRxDataBuffer[0] == 0x6E)&&(gRxDataBuffer[1]== 0xF1)&&(gRxDataBuffer[2]== 0x98))
+    {
+        DiagWriteProgramDate();
+    }
+    else{
+      DiagWriteProgramSerialNum();
+    }
+}
+
+void DiagWriteProgramDate(void)
+{
+    Diag_Status = WriteDownloadDate;
+//    IsDiagWaitResp = 1;  
+    gTxDataBuffer[0] = 0x2E;
+    gTxDataBuffer[1] = 0xF1;
+    gTxDataBuffer[2] = 0x99;
+    gTxDataBuffer[3] = TimeDateStr[0];
+    gTxDataBuffer[4] = TimeDateStr[1];
+    gTxDataBuffer[5] = TimeDateStr[2];
+    gTxDataBuffer[6] = TimeDateStr[3];
+    txCount = 7;
+    CurrentTransIndex = 0;
+    OSEKTL_DataReq(gTxDataBuffer, txCount);
+}
+
+
+
+dword CalculateBlockDataCrc32(char type, int block)
+{ 
+  dword Cnt = 0;
+  int blockStart;
+  dword filechecksum;
+  filechecksum = 0xFFFFFFFF;
+  init_crc_table();
+  if(type == FLASHDATA)
+    {
+      if(block< DataBlockTotalNum)
+      {   
+          blockStart = DataBlockStartIndex[block];
+          while(Cnt < DataBlockLength[block])
+          {
+              if(Cnt + 1024 < DataBlockLength[block])
+              {
+                 filechecksum = crc32(filechecksum,DataStr[blockStart],1024);
+                 Cnt +=1024;
+                  blockStart++; 
+              }
+              else
+              {
+                 filechecksum = crc32(filechecksum,DataStr[blockStart],DataBlockLength[block] - Cnt);
+                 Cnt = DataBlockLength[block];
+              }
+          }
+      }
+    }
+    else
+    {
+       if(block< DrvBlockTotalNum)
+      {
+          blockStart = DrvBlockStartIndex[block];
+          while(Cnt < DrvBlockLength[block])
+          {
+              if(Cnt + 1024 < DrvBlockLength[block])
+              {
+                 filechecksum = crc32(filechecksum,DrvStr[blockStart],1024);
+                 Cnt +=1024;
+                  blockStart++; 
+              }
+              else
+              {
+                 filechecksum = crc32(filechecksum,DrvStr[blockStart],DrvBlockLength[block] - Cnt);
+                 Cnt = DrvBlockLength[block];
+              }
+          }
+      }
+    }
+    return filechecksum;
+}
+
+void DiagCheckFileChecksum(void)
+{
+    Diag_Status = SetCalculateChecksum;
+//  IsDiagWaitResp = 1;
+    gTxDataBuffer[0] = 0x31;
+    gTxDataBuffer[1] = 0x01;
+    gTxDataBuffer[2] = 0x02;
+    gTxDataBuffer[3] = 0x02;
+    if(IsDrvFileDownload == 1)
+    {
+       file_checksum = CalculateBlockDataCrc32(FLASHDRIVER,CurrentTransIndex);
+    }
+    else
+    {
+      file_checksum = CalculateBlockDataCrc32(FLASHDATA,CurrentTransIndex);
+    }
+    gTxDataBuffer[4] = (byte)(file_checksum>>24);
+    gTxDataBuffer[5] = (byte)(file_checksum>>16);
+    gTxDataBuffer[6] = (byte)(file_checksum>>8);
+    gTxDataBuffer[7] = (byte)(file_checksum);
+    txCount = 8;
+    OSEKTL_DataReq(gTxDataBuffer, txCount);  
+    //OSEKTL_DataInd
+}
+
+void DiagCheckFileChecksumResp(void)
+{
+  write("the checksum resp is received!");  
+  if((gRxDataBuffer[0] == 0x7F)&&(gRxDataBuffer[1]==0x31)&&(gRxDataBuffer[2]==0x78))
+    {
+    }
+    else if((gRxDataBuffer[0] == 0x71)&&(gRxDataBuffer[1]== 0x01)&&(gRxDataBuffer[4]== 0x04))
+    {
+      CurrentTransIndex++;
+      write("Flash Driver was Download Finished!!!");
+      if(IsDrvFileDownload == 1)
+      {
+        if(CurrentTransIndex >= DrvBlockTotalNum)
+        {
+          IsDrvFileDownload = 0;
+          write("Flash Driver was Download Finished!!!");
+          putValue(PromgramIndicationStr, "Flash Driver was Download Finished!!!");
+          CurrentTransIndex = 0;
+          DiagEraseFlashSector();
+        }
+      }
+      else
+      {
+        write("the transfer block index is %d, the code block total num is %d",CurrentTransIndex,DataBlockTotalNum);
+        if(CurrentTransIndex >= DataBlockTotalNum)
+        {
+           putValue(PromgramIndicationStr, "Code Data was Download Finished!!!"); 
+          DiagCheckProgramDependency();
+        }else
+        {
+         // putValue(PromgramIndicationStr, "Transfer the next block Code data!!!");
+          DiagEraseFlashSector();
+        }
+        
+      }
+    }
+}
+
+
+void DiagEraseFlashSector(void)
+{
+    Diag_Status = StartEraseMemoryProcedure; 
+//   IsDiagWaitResp = 1;
+    gTxDataBuffer[0] = 0x31;
+    gTxDataBuffer[1] = 0x01;
+    gTxDataBuffer[2] = 0xff;
+    gTxDataBuffer[3] = 0x00;
+    gTxDataBuffer[4] = 0x44;
+    
+    gTxDataBuffer[5] = (byte)(DataBlockAddr[CurrentTransIndex]>>24);
+    gTxDataBuffer[6] = (byte)(DataBlockAddr[CurrentTransIndex]>>16);
+    gTxDataBuffer[7] = (byte)(DataBlockAddr[CurrentTransIndex]>>8);
+    gTxDataBuffer[8] = (byte)(DataBlockAddr[CurrentTransIndex]);
+  
+    gTxDataBuffer[9] = (byte)(DataBlockLength[CurrentTransIndex]>>24);
+    gTxDataBuffer[10] = (byte)(DataBlockLength[CurrentTransIndex]>>16);
+    gTxDataBuffer[11] = (byte)(DataBlockLength[CurrentTransIndex]>>8);
+    gTxDataBuffer[12] = (byte)(DataBlockLength[CurrentTransIndex]);
+    txCount = 13;
+    OSEKTL_DataReq(gTxDataBuffer, txCount);
+   
+}
+
+void DiagEraseFlashSectorResp(void)
+{
+    if((gRxDataBuffer[0] == 0x7F)&&(gRxDataBuffer[1]==0x31)&&(gRxDataBuffer[2]==0x78))
+    {
+    }else if((gRxDataBuffer[0] == 0x71)&&(gRxDataBuffer[1]== 0x01)&&(gRxDataBuffer[4]== 0x04))
+    {
+       DiagRequestDownloadData();
+    }
+}
+
+void DiagWriteProgramDateResp(void)
+{
+    if((gRxDataBuffer[0] == 0x6E)&&(gRxDataBuffer[1]== 0xF1)&&(gRxDataBuffer[2]== 0x99))
+    {
+      //write("IsDrvFileNeed is %d,IsDrvFileValid is %d ",IsDrvFileNeed,IsDrvFileValid);
+      if((IsDrvFileNeed==1)&&(IsDrvFileValid==1))
+      {
+        
+        IsDrvFileDownload = 1;
+        CurrentTransIndex = 0;
+        DiagRequestDownloadData();
+      }
+      else
+      {
+        IsDrvFileDownload = 0;
+        CurrentTransIndex = 0;
+        DiagEraseFlashSector();
+      }
+      //write("IsDrvFileDownload is %d",IsDrvFileDownload); 
+    }
+    else{
+      DiagWriteProgramSerialNum();
+    }
+}
+
+
+void DiagRequestDownloadData(void)
+{
+    Diag_Status = RequestDownload; 
+//    IsDiagWaitResp = 1;
+    gTxDataBuffer[0] = 0x34;
+    gTxDataBuffer[1] = 0x00;
+    gTxDataBuffer[2] = 0x44;
+    if(IsDrvFileDownload == 1)
+    {
+      gTxDataBuffer[3] = (byte)(DrvBlockAddr[CurrentTransIndex]>>24);
+      gTxDataBuffer[4] = (byte)(DrvBlockAddr[CurrentTransIndex]>>16);
+      gTxDataBuffer[5] = (byte)(DrvBlockAddr[CurrentTransIndex]>>8);
+      gTxDataBuffer[6] = (byte)(DrvBlockAddr[CurrentTransIndex]);
+    
+      gTxDataBuffer[7] = (byte)(DrvBlockLength[CurrentTransIndex]>>24);
+      gTxDataBuffer[8] = (byte)(DrvBlockLength[CurrentTransIndex]>>16);
+      gTxDataBuffer[9] = (byte)(DrvBlockLength[CurrentTransIndex]>>8);
+      gTxDataBuffer[10] = (byte)(DrvBlockLength[CurrentTransIndex]);
+    }
+    else
+    {
+      gTxDataBuffer[3] = (byte)(DataBlockAddr[CurrentTransIndex]>>24);
+      gTxDataBuffer[4] = (byte)(DataBlockAddr[CurrentTransIndex]>>16);
+      gTxDataBuffer[5] = (byte)(DataBlockAddr[CurrentTransIndex]>>8);
+      gTxDataBuffer[6] = (byte)(DataBlockAddr[CurrentTransIndex]);
+    
+      gTxDataBuffer[7] = (byte)(DataBlockLength[CurrentTransIndex]>>24);
+      gTxDataBuffer[8] = (byte)(DataBlockLength[CurrentTransIndex]>>16);
+      gTxDataBuffer[9] = (byte)(DataBlockLength[CurrentTransIndex]>>8);
+      gTxDataBuffer[10] = (byte)(DataBlockLength[CurrentTransIndex]);
+    }
+    txCount = 11;
+    OSEKTL_DataReq(gTxDataBuffer, txCount);
+    CurrentBlockIndex = 0;
+    CurrentBlockCnt = 0;
+    CurrPos = 0;
+    CurrBlock = DataBlockStartIndex[CurrentTransIndex];
+    write("the CurrentTransIndex is %d", CurrentTransIndex);
+    
+}
+
+void DiagRequestDownloadDataResp(void)
+{
+    if((gRxDataBuffer[0] == 0x7F)&&(gRxDataBuffer[1]==0x34)&&(gRxDataBuffer[2]==0x78))
+    {
+    }else if((gRxDataBuffer[0] == 0x74)&&(gRxDataBuffer[1]== 0x40))
+    {
+       //if(CurrentBlockPos>= DataBlockLength[CurrentTransIndex])
+       {
+          TransferBlockSize = gRxDataBuffer[5];
+          TransferBlockSize += (dword)(gRxDataBuffer[4]<<8);
+          TransferBlockSize += (dword)(gRxDataBuffer[3]<<16);
+          TransferBlockSize += (dword)(gRxDataBuffer[2]<<24);
+          TransferBlockSize -=2;
+          //write("the transfer block size is %d", TransferBlockSize);  
+          DiagTransferData();
+       }
+    }
+}
+
+void DiagTransferData(void)
+{
+    long i;
+    long Len;
+    Diag_Status = TransferDataBlock;  
+//    IsDiagWaitResp = 1;
+    if(IsDrvFileDownload == 1)
+    {
+      write("drv is transfer");  
+      if(CurrentBlockCnt + TransferBlockSize>DrvBlockLength[CurrentTransIndex])
+        {
+          Len = DataBlockLength[CurrentTransIndex] - CurrentBlockCnt;
+        }
+        else
+        {
+          Len = TransferBlockSize;
+        }
+//        write("the transfer block size is %d",DrvBlockLength[CurrentTransIndex]);
+//        write("the CurrentBlockCnt is %d",CurrentBlockCnt);
+//        write("the Len is %d",Len);
+    }
+    else
+    {
+        if(CurrentBlockCnt + TransferBlockSize>DataBlockLength[CurrentTransIndex])
+        {
+          Len = DataBlockLength[CurrentTransIndex] - CurrentBlockCnt;
+        }
+        else
+        {
+          Len = TransferBlockSize;
+        }
+//        write("the transfer Data block size is %d",DataBlockLength[CurrentTransIndex]);
+//        write("the CurrentBlockCnt is %d",CurrentBlockCnt);
+//        write("the Len is %d",Len);
+    }
+    CurrentBlockCnt += Len;
+    //write("this block length is %X,%",Len,Len);
+    gTxDataBuffer[0] = 0x36;
+    gTxDataBuffer[1] = CurrentBlockIndex;
+    CurrentTotalLen +=Len; 
+    if(IsDrvFileDownload == 1)
+    {  
+      write("the drv str CurrBlock is %d,CurrPos is %d ",CurrBlock,CurrPos);
+      for(i=0;i < Len;i++)
+      { 
+        gTxDataBuffer[2+i] = DrvStr[CurrBlock][CurrPos];
+        if(++CurrPos>=1024)
+        {
+          CurrBlock++;
+          CurrPos=0;
+        }
+      }
+    }else
+    {
+       //write("the Code str CurrBlock is %d,CurrPos is %d ",CurrBlock,CurrPos); 
+      for(i=0;i < Len;i++)
+      {   
+        gTxDataBuffer[2+i] = DataStr[CurrBlock][CurrPos];
+        if(++CurrPos>=1024)
+        {
+          CurrBlock++;
+          CurrPos=0;
+        }
+      }
+    }
+    txCount = 2 + Len;
+    OSEKTL_DataReq(gTxDataBuffer, txCount); 
+    
+//    IsDiagWaitResp = 1;
+}
+
+void DiagTransferDataResp(void)
+{
+    //write("the transfer resp received!");
+    if((gRxDataBuffer[0] == 0x7F)&&(gRxDataBuffer[1]==0x36)&&(gRxDataBuffer[2]==0x78))
+    {
+    }
+    else if((gRxDataBuffer[0] == 0x76)&&(gRxDataBuffer[1]== CurrentBlockIndex))
+    {
+       putValue(ProgramProcessBar, CurrentTotalLen*100/(DataTotalLen + DrvTotalLen)); 
+       if(IsDrvFileDownload == 1)
+       {
+          if(CurrentBlockCnt>= DrvBlockLength[CurrentTransIndex])
+          {
+              DiagStopTransferData(); 
+          }else
+          {
+            CurrentBlockIndex++; 
+            DiagTransferData();
+          }
+       } 
+      else
+      {
+        write("Code transfer index is 0x%X",CurrentBlockCnt);
+        if(CurrentBlockCnt>= DataBlockLength[CurrentTransIndex])
+          {
+             DiagStopTransferData(); 
+          }
+          else
+          {
+            CurrentBlockIndex++; 
+            DiagTransferData();
+          }
+      }
+    }
+}
+
+void DiagStopTransferData(void)
+{
+    Diag_Status = StopTransferData;  
+//    IsDiagWaitResp = 1;
+    gTxDataBuffer[0] = 0x37;
+    gTxDataBuffer[1] = (byte)(CurrentTransIndex);      
+    txCount = 2;
+    OSEKTL_DataReq(gTxDataBuffer, txCount);
+}
+
+void DiagStopTransferDataResp(void)
+{
+    if(gRxDataBuffer[0] == 0x77)
+    {
+       DiagCheckFileChecksum();
+    }
+}
+
+void DiagCheckProgramDependency(void)
+{
+    Diag_Status = CheckProgramDependency;  
+//    IsDiagWaitResp = 1;
+    gTxDataBuffer[0] = 0x31;
+    gTxDataBuffer[1] = 0x01;
+    gTxDataBuffer[2] = 0xFF;
+    gTxDataBuffer[3] = 0x01;
+    txCount = 4;
+    OSEKTL_DataReq(gTxDataBuffer, txCount);
+  
+}
+void DiagCheckProgramDependencyResp(void)
+{
+    if((gRxDataBuffer[0] == 0x7F)&&(gRxDataBuffer[1]==0x36)&&(gRxDataBuffer[2]==0x78))
+    {
+    }
+    else if((gRxDataBuffer[0] == 0x71)&&(gRxDataBuffer[1]== 0x01)&&(gRxDataBuffer[4]== 0x04))
+    {
+       
+       DiagResetMcu();
+    }
+  
+}
+
+      
+void DiagResetMcu(void)
+{
+    Diag_Status = RequestResetMcu;    
+    gTxDataBuffer[0] = 0x11;
+    gTxDataBuffer[1] = 0x01;
+    txCount = 2;
+    OSEKTL_DataReq(gTxDataBuffer, txCount);
+//  IsDiagWaitResp = 1;
+    @sysvar::DiagService::sysDiagFinished = 1;
+    putValue(PromgramIndicationStr, "Download is successful!!!");
+}
+
+void DiagResetMcuResp(void)
+{
+   if((gRxDataBuffer[0] == 0x51)&&(gRxDataBuffer[1]== 0x01))
+    {
+      Diag_Status = DownloadFinished;
+    }
+}
+
+

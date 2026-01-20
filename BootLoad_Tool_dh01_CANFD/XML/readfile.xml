@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<systemvariables version="4">
+  <namespace name="" comment="">
+    <namespace name="ReadFile" comment="">
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="sysCodeFileLength" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="sysCodeFilePath" comment="" bitcount="8" isSigned="true" encoding="65001" type="string" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="sysDrvFileLength" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="sysDrvFilePath" comment="" bitcount="8" isSigned="true" encoding="65001" type="string" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="sysIsCodeFileValid" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="sysIsDrvFileNeeded" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" />
+      <variable anlyzLocal="0" readOnly="false" valueSequence="false" unit="" name="sysIsDrvFileValid" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="0" />
+    </namespace>
+  </namespace>
+</systemvariables>
