@@ -1,0 +1,15 @@
+.*/
+*.pyc
+*.log
+*.csv
+*.svg
+*.ini
+*.txt
+*.json
+
+log/
+logs/
+
+build/
+dist/
+*.spec
