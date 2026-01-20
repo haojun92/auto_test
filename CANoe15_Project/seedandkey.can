@@ -1,0 +1,84 @@
+/*@!Encoding:936*/
+includes
+{
+  
+}
+
+variables
+{
+  //actual size of Seed and Key Arrays depend on ECU
+  byte gSeedArray[16];
+  int gSeedArraySize       = 16;
+  int gSecurityLevel       = 0x20;
+  char gVariant[200]       = "Variant1";
+  char gOption[200]        = "option";
+  byte gKeyArray[255];
+  int  gMaxKeyArraySize    = 16;
+  dword gActualSizeOut     = 0;
+  char gDebugBuffer[2000];
+  diagRequest  QH01_HoloArk_ADCC::SeedLevel1_Request::Request gSeedReq;
+  diagResponse QH01_HoloArk_ADCC::SeedLevel1_Request::Request gSeedResp;
+  //diagRequest  QH01_HoloArk_ADCC.KeyLevel1_Send::Send gKeyReq;
+  
+  diagRequest QH01_HoloArk_ADCC.SeedLevel1_Request        gSeedReq_0x01;
+  diagRequest QH01_HoloArk_ADCC.KeyLevel1_Send            gKeyReq_0x02;
+  
+  diagRequest QH01_HoloArk_ADCC.DefaultSession_Start              _0x10Service_0x01_sub;
+  diagRequest QH01_HoloArk_ADCC.ExtendedDiagnosticSession_Start   _0x10Service_0x03_sub;
+}
+
+
+//计算秘钥0x01
+on diagResponse QH01_HoloArk_ADCC.SeedLevel1_Request
+{
+  long ret;
+  
+  //Request seed from ECU
+  diagSendRequest(gSeedReq_0x01);
+  
+  //Wait until request has been sent completely
+  testWaitForDiagRequestSent(gSeedReq_0x01, 1000);
+  
+  //Wait for response and write seed from response parameter to array
+  testWaitForDiagResponse(gSeedReq_0x01, 1000);
+  
+  diagGetLastResponse (gSeedReq_0x01, gSeedResp);
+  diagGetParameterRaw (gSeedResp, "Seed", gSeedArray, elcount(gSeedArray));
+  
+  //Calculate key
+  // _Diag_GetError is called when an error occurs
+  diagSetTarget("QH01_HoloArk_ADCC");
+  ret = diagGenerateKeyFromSeed (gSeedArray, gSeedArraySize, gSecurityLevel, gVariant, gOption, gKeyArray, gMaxKeyArraySize, gActualSizeOut);
+  write("Result of Tester GenerateKeyFromSeed:%d",ret);
+  if( 0 == ret)
+  {
+    //Write result to diagnostic request
+    diagSetParameterRaw(gKeyReq_0x02, "Key", gKeyArray, gActualSizeOut);
+    //Send Key to unlock ECU
+    testWaitForDiagRequestSent(gKeyReq_0x02, 1000);
+  }
+}
+
+
+void MainTest()
+{
+  DoIP_ConnectToVehicle(); //如果要调用DoIP的接口，需要打开这个
+  //testWaitForTimeout(1000);
+  //putValueToControl("HolomaticDoIPUpdatePanel","CAPL_Output_View","车辆连接完成\n");
+  
+  //RequestFileTransfer();
+//  testWaitForTimeout(1000);
+//  _36_service();
+  
+  diagSendRequest(_0x10Service_0x01_sub);
+  testWaitForTimeout(500);
+  diagSendRequest(_0x10Service_0x03_sub);
+  testWaitForTimeout(500);
+  
+  diagSendRequest(gSeedReq_0x01);
+  testWaitForTimeout(500);
+  while(1)
+  {
+    testWaitForTimeout(1000);
+  }
+}

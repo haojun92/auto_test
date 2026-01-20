@@ -1,0 +1,292 @@
+Encoding: iso-8859-1
+Detected dtd version 11.0.102
+VCANdelaPersistorImpl::GetFileVersion: DTD version '11.0.102' detected
+Detected dtd version 11.0.102
+VCANdelaPersistorImpl::GetFileVersion: DTD version '11.0.102' detected
+Searching for registry key Software\Vector\CANdelaPersistors for global persistors path
+  registry key exists, value: 'c:\Program Files (x86)\Common Files\Vector CANdelaPersistors 18\Bin' (this directory exists)
+  global persistors version: 18.0.00101
+Using persistors path: "c:\Program Files (x86)\Common Files\Vector CANdelaPersistors 18\Bin\" for loading from other version.
+Detected dtd version 11.0.102
+VCANdelaPersistorImpl::GetFileVersion: DTD version '11.0.102' detected
+Load file: Converting from version '11.0.102' to version '12.5.99999'
+VPersistorCaller::LoadDatabase: BEGIN logging of 'c:\Program Files (x86)\Common Files\Vector CANdelaPersistors 18\Bin\8.2.1_12.0.1_12.5.99999\'
+
+VPersistorCaller::LoadDatabase: END logging of 'c:\Program Files (x86)\Common Files\Vector CANdelaPersistors 18\Bin\8.2.1_12.0.1_12.5.99999\'
+Detected dtd version 12.5.103
+VCANdelaPersistorImpl::GetFileVersion: DTD version '12.5.103' detected
+Loading 'C:\Users\holo\AppData\Local\Temp\CDL190A.tmp'...
+  dtd version: file 12.5.103, program 18.0.6
+Document supports the languages (en-US)
+Document contains the uptodate languages (en-US)
+Template: Vector UDS
+  template data loaded
+  variant 'Base_Variant' loaded
+Migrate DIDs: ...
+Migrate DIDs: Diagnostic Class Template(s) with DID semantics:
+Migrate DIDs:  ECU Identification
+Migrate DIDs:  Variant Coding
+Migrate DIDs:  Stored Data
+Migrate DIDs:  Dynamic Data
+Migrate DIDs:  Periodic Data
+Migrate DIDs:  IO Control
+Migrate DIDs: Created attribute "qpath://[DIAGINSTDEFATTR]DIDDataReferenceQualifier17"
+Migrate DIDs: Created attribute "qpath://[DIAGINSTDEFATTR]DIDDataReferenceName17"
+Migrate DIDs: Moved DID data of DID "Vehicle manufacturer calibration version number", 0xF032 to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/Vehicle_mode"
+Migrate DIDs: Moved DID data of DID "Boot Software Identification", 0xF180 to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/Boot_Software"
+Migrate DIDs: Moved DID data of DID "Vehicle manufacturer spare part number", 0xF187 to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/Spare_Part_Number"
+Migrate DIDs: Moved DID data of DID "ECU Serial Number", 0xF18C to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/SerialNumber"
+Migrate DIDs: Moved DID data of DID "Ecu Identification", 0xF189 to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/EcuIdentification"
+Migrate DIDs: Moved DID data of DID "Vehicle manufacturer ECU hardware number", 0xF089 to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/Software_Install_Flag"
+Migrate DIDs: Moved DID data of DID "Vehicle Manufacturer Logistic Software Part Number", 0xF013 to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0xF188"
+Migrate DIDs: Moved DID data of DID "System supplier identifier", 0xF18A to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0xF18A"
+Migrate DIDs: Moved DID data of DID "DID 0xF18D" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0xF18D"
+Migrate DIDs: Moved DID data of DID "InstallationProgressAndResultObtaining", 0xF0F2 to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/InstallationProgressAndResultObtaining"
+Migrate DIDs: Moved DID data of DID "fingerprint", 0xF184 to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0xF184"
+Migrate DIDs: Moved DID data of DID "DID 0xF0F0" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0xF0F0"
+Migrate DIDs: Moved DID data of DID "DID 0xF18B" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0xF18B"
+Migrate DIDs: Moved DID data of DID "DID 0x4001" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0x4001"
+Migrate DIDs: Moved DID data of DID "DID 0x4002" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0xF014_1"
+Migrate DIDs: Moved DID data of DID "DID 0x4003" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0xF014_1_1"
+Migrate DIDs: Moved DID data of DID "DID 0x4004" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0x4004"
+Migrate DIDs: Moved DID data of DID "DID 0x4008" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0x4008"
+Migrate DIDs: Moved DID data of DID "DID 0x4009" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0x4006_1"
+Migrate DIDs: Moved DID data of DID "DID 0x400A" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0x400A"
+Migrate DIDs: Moved DID data of DID "DID 0x400B" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0x400B"
+Migrate DIDs: Moved DID data of DID "DID 0x400C" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0x400C"
+Migrate DIDs: Moved DID data of DID "DID 0x40AB" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0x40AB"
+Migrate DIDs: Moved DID data of DID "DID 0x4000" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0x4000"
+Migrate DIDs: Moved DID data of DID "DID 0x4080" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0x4005_1"
+Migrate DIDs: Moved DID data of DID "DID 0x4006" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0x4005_1_1"
+Migrate DIDs: Moved DID data of DID "DID 0xF011" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0xF011"
+Migrate DIDs: Moved DID data of DID "DID 0x4007" to the existing DID Diagnostic Instance "qpath:/Base_Variant/ECU_Identification/DID_0x4005_1_2"
+Migrate DIDs: Moved DID data of DID "Vehicle Manufacturer Calibration Data Part Number", 0xF031 to the existing DID Diagnostic Instance "qpath:/Base_Variant/Variant_Coding/New_Variant_Coding"
+Migrate DIDs: Number of DID(s) moved to 29 DID Diagnostic Instance(s): 29
+Migrate DIDs: DID and Diagnostic Instance default attributes have an attribute with the same qualifier: "SYNCHELEMENT"
+Migrate DIDs: Moved DID attribute "ASR3_Legacy_Combine_DID" to Diagnostic Instance
+Migrate DIDs: Created attribute "qpath://[DIAGINSTDEFATTR]DIDQualifier17"
+Migrate DIDs: Created attribute "qpath://[DIAGINSTDEFATTR]DIDName17"
+Migrate DIDs: ...Done
+Migration 18.0: deleting no longer needed Attribute "Check Identifier for Uniqueness".
+Migration 17: creating missing attribute(s) for AUTOSAR Diagnostic Extract Export...
+Skipping existing "ECU" attribute "Max Number of Dyn. Defined DID References".
+Skipping existing "ECU" attribute "Periodic Rate (Slow) [ms]".
+Skipping existing "ECU" attribute "Periodic Rate (Medium) [ms]".
+Skipping existing "ECU" attribute "Periodic Rate (Fast) [ms]".
+Skipping existing "ECU" attribute "DDDID check per source ID".
+Skipping existing "ECU" attribute "DDDID configuration storage".
+Skipping existing "ECU" attribute "SynchronizationAttribute".
+Skipping existing "Interface" attribute "CAN.DiagnosticConnectionRef".
+Skipping existing "Interface" attribute "CAN_Extended_Addressing.DiagnosticConnectionRef".
+Skipping existing "Interface" attribute "FlexRay_ISO.DiagnosticConnectionRef".
+Skipping existing "Interface" attribute "FlexRay_Autosar2x.DiagnosticConnectionRef".
+Skipping existing "Interface" attribute "DoIP_ISO13400.DiagnosticConnectionRef".
+Skipping existing "Interface" attribute "CAN_FD.DiagnosticConnectionRef".
+Skipping existing "Interface" attribute "CAN_FD_Extended_Addressing.DiagnosticConnectionRef".
+Skipping existing "Interface" attribute "CAN.DiagnosticProtocolPriority".
+Skipping existing "Interface" attribute "CAN_Extended_Addressing.DiagnosticProtocolPriority".
+Skipping existing "Interface" attribute "FlexRay_ISO.DiagnosticProtocolPriority".
+Skipping existing "Interface" attribute "FlexRay_Autosar2x.DiagnosticProtocolPriority".
+Skipping existing "Interface" attribute "DoIP_ISO13400.DiagnosticProtocolPriority".
+Skipping existing "Interface" attribute "CAN_FD.DiagnosticProtocolPriority".
+Skipping existing "Interface" attribute "CAN_FD_Extended_Addressing.DiagnosticProtocolPriority".
+Skipping existing "Diagnostic Instance" attribute "Instance Type".
+Skipping existing "Diagnostic Instance" attribute "Max Attempts to Delay".
+Skipping existing "Diagnostic Instance" attribute "Delay Time [ms]".
+Skipping existing "Diagnostic Instance" attribute "Delay Time on PowerOn [ms]".
+Skipping existing "Diagnostic Instance" attribute "SYNCHELEMENT".
+Skipping existing "Diagnostic Instance" attribute "ASR SWC ServiceDependency Ref".
+Skipping existing "Diagnostic Instance" attribute "ASR3 Legacy Combine DID".
+Skipping existing "Data Object / Bitfield" attribute "ASR SWC DataElement Ref".
+Skipping existing "Data Object / Bitfield" attribute "SYNCHELEMENT".
+Skipping existing "Data Object / Bitfield" attribute "ASR UUID".
+Skipping existing "DTC" attribute "ASR SWC ServiceDependency Ref".
+Skipping existing "DTC" attribute "SYNCHELEMENT".
+Skipping existing "Data Type" attribute "ASR Encoding".
+Creating "Condition" attribute "ASR SWC ServiceDependency Ref".
+Creating "Data Object / Bitfield" attribute "ASR SWC ServiceDependency Ref".
+Creating "Diagnostic Instance" attribute "ASR3 Legacy Combine Routine".
+Creating "Diagnostic Instance" attribute "ASR UUID".
+Creating "Diagnostic Instance" attribute "Environment Data Capture".
+Creating "Diagnostic Instance" attribute "Event Displacement Strategy".
+Creating "Diagnostic Instance" attribute "Max Number of Event Entries".
+Creating "Diagnostic Instance" attribute "Memory Entry Storage Trigger".
+Creating "Diagnostic Instance" attribute "Occurrence Counter Processing".
+Creating "ECU" attribute "ASR ECU Instance Ref".
+Creating "ECU" attribute "AUTOSAR Type".
+Creating "ECU" attribute "AUTOSAR Version".
+Creating "ECU" attribute "Aging Requires Tested Cycle".
+Creating "ECU" attribute "ClearDtc Limitation".
+Creating "ECU" attribute "Default Endianess".
+Creating "ECU" attribute "OBD Support".
+Creating "ECU" attribute "Reset Confirmed Bit on Overflow".
+Creating "ECU" attribute "Respond On All Request SIDs".
+Creating "ECU" attribute "Respond on Second Declined Request".
+Creating "ECU" attribute "Respond to ECU Reset".
+Creating "ECU" attribute "Status Bit Handling TestFailed".
+Creating "ECU" attribute "Status Bit Storage TestFailed".
+Creating "Environmental Condition Group" attribute "ASR SWC DataElement Ref".
+Creating "Environmental Condition Group" attribute "ASR SWC ServiceDependency Ref".
+Creating "Environmental Condition Group" attribute "ASR UUID".
+Creating "Environmental Mode Condition" attribute "ASR SWC ModeDeclaration Ref".
+Creating "Event Function" attribute "ASR SWC ServiceDependency Ref".
+Creating "Event" attribute "ASR SWC ServiceDependency Ref".
+Creating "Indicator" attribute "ASR SWC ServiceDependency Ref".
+Creating "Interface" attribute "CAN.SendRespPendOnTransToBoot".
+Creating "Interface" attribute "CAN_Extended_Addressing.SendRespPendOnTransToBoot".
+Creating "Interface" attribute "CAN_FD.SendRespPendOnTransToBoot".
+Creating "Interface" attribute "CAN_FD_Extended_Addressing.SendRespPendOnTransToBoot".
+Creating "Interface" attribute "DoIP_ISO13400.SendRespPendOnTransToBoot".
+Creating "Interface" attribute "FlexRay_Autosar2x.SendRespPendOnTransToBoot".
+Creating "Interface" attribute "FlexRay_ISO.SendRespPendOnTransToBoot".
+Creating "Operation Cycle" attribute "ASR SWC ServiceDependency Ref".
+Creating "Service" attribute "Service Relevant for Autosar".
+Creating "State" attribute "ASR SWC ModeDeclaration Ref".
+Creating "State" attribute "Jump to Boot".
+Migration 17: ... created missing attribute(s) for AUTOSAR Diagnostic Extract Export
+AUTOSAR fault memory migration, Read snapshots: diagnostic instance "qpath:/Base_Variant/FaultMemory" has services that use different set of record numbers.
+AUTOSAR fault memory migration, Read snapshots: protocol service 1903: "($19) ReadDtcInformation - ReportDtcSnapshotIdentification":
+AUTOSAR fault memory migration, Read snapshots:   Snapshot Records:
+AUTOSAR fault memory migration, Read snapshots:    0x01 Snapshot
+AUTOSAR fault memory migration, Read snapshots: protocol service 1904: "($19) ReadDtcInformation - Report DTC snapshot record by DTC number":
+AUTOSAR fault memory migration, Read snapshots:   Snapshot Records:
+AUTOSAR fault memory migration, Read snapshots:    0x01 Snapshot Record 0x01
+AUTOSAR fault memory migration, Read snapshots:    0x02 Snapshot Record 0x02
+AUTOSAR fault memory migration, Read snapshots:    0x03 Snapshot Record 0x03
+AUTOSAR fault memory migration, Read snapshots:    0x04 Snapshot Record 0x04
+AUTOSAR fault memory migration, Read snapshots: cannot migrate Read Snapshot Data services to AUTOSAR fault memory format.
+AUTOSAR fault memory migration, Read extended data records: migrating diagnostic instance "qpath:/Base_Variant/FaultMemory"...
+AUTOSAR fault memory migration, Read extended data records: Extended Data Records:
+AUTOSAR fault memory migration, Read extended data records:  0x01 Extended Data Record 0x01
+AUTOSAR fault memory migration, Read extended data records:  0x02 Extended Data Record 0x02
+AUTOSAR fault memory migration, Read extended data records:  0x03 Extended Data Record 0x03
+AUTOSAR fault memory migration, Read extended data records:  0x04 Extended Data Record 0x04
+AUTOSAR fault memory migration, Read extended data records: set "Is Stored For Extended Data Records"
+AUTOSAR fault memory migration, Read extended data records: ...Success
+AUTOSAR fault memory migration, Read extended data records: migrating diagnostic instance "qpath:/Base_Variant/User_Defined_Fault_Memories/User_Defined_Fault_Memory_1"...
+AUTOSAR fault memory migration, Read extended data records: Extended Data Records:
+AUTOSAR fault memory migration, Read extended data records:  0x01 StandardEnvironmentData
+AUTOSAR fault memory migration, Read extended data records: set "Is Stored For Extended Data Records"
+AUTOSAR fault memory migration, Read extended data records: ...Success
+AUTOSAR fault memory migration, Read extended data records: migrating diagnostic instance "qpath:/Base_Variant/User_Defined_Fault_Memories/User_Defined_Fault_Memory_2"...
+AUTOSAR fault memory migration, Read extended data records: Extended Data Records:
+AUTOSAR fault memory migration, Read extended data records:  0x01 StandardEnvironmentData
+AUTOSAR fault memory migration, Read extended data records: set "Is Stored For Extended Data Records"
+AUTOSAR fault memory migration, Read extended data records: ...Success
+AUTOSAR fault memory migration, Read extended data records: migrating diagnostic instance "qpath:/Base_Variant/User_Defined_Fault_Memories/User_Defined_Fault_Memory_3"...
+AUTOSAR fault memory migration, Read extended data records: Extended Data Records:
+AUTOSAR fault memory migration, Read extended data records:  0x01 StandardEnvironmentData
+AUTOSAR fault memory migration, Read extended data records: set "Is Stored For Extended Data Records"
+AUTOSAR fault memory migration, Read extended data records: ...Success
+AUTOSAR fault memory migration, Read extended data records: migrating protocol service 1910 "($19) ReadDtcInformation - Report mirror memory DTC extended data record by DTC number"...
+AUTOSAR fault memory migration, Read extended data records: ...Success
+AUTOSAR fault memory migration, Read extended data records: migrating protocol service 1906 "($19) ReadDtcInformation - Report DTC extended data record by DTC number"...
+AUTOSAR fault memory migration, Read extended data records: ...Success
+AUTOSAR fault memory migration, Read extended data records: migrating protocol service 1919 "($19) ReadDtcInformation - ReportUserDefMemoryDTCExtendedDataRecordByDTCNumber"...
+AUTOSAR fault memory migration, Read extended data records: ...Success
+Done loading.
+Checking consistency of document. This may take a while, please be patient...
+Identifier out of bounds: ID 0x0006 is not supported by ID-defining TextTable 'Subfunction DiagnosticSessionControl' associated to diagnostic instance 'qpath:/Base_Variant/Sessions/Holo_EOL_Session'. Please correct the identifier.
+Identifier out of bounds: ID 0x0012 is not supported by ID-defining TextTable 'Subfunction SecurityAccess' associated to diagnostic instance 'qpath:/Base_Variant/SecurityAccess/SendKey_0x12'. Please correct the identifier.
+Identifier out of bounds: ID 0x0011 is not supported by ID-defining TextTable 'Subfunction SecurityAccess' associated to diagnostic instance 'qpath:/Base_Variant/SecurityAccess/RequestSeed_0x11'. Please correct the identifier.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/Spare_Part_Number":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/Spare_Part_Number":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/Spare_Part_Number":
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/Spare_Part_Number":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/Spare_Part_Number":
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/Spare_Part_Number":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/EcuIdentification":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/EcuIdentification":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/EcuIdentification":
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/EcuIdentification":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/EcuIdentification":
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/EcuIdentification":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/Software_Install_Flag":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/Software_Install_Flag":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/Software_Install_Flag":
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/Software_Install_Flag":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/Software_Install_Flag":
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/Software_Install_Flag":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/DID_0xF18D":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/DID_0xF18D":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/DID_0xF18D":
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/DID_0xF18D":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/DID_0xF18D":
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/DID_0xF18D":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/InstallationProgressAndResultObtaining":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/InstallationProgressAndResultObtaining":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/InstallationProgressAndResultObtaining":
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/InstallationProgressAndResultObtaining":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/InstallationProgressAndResultObtaining":
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+Content of tab page "DataRecord" in "qpath:/Base_Variant/ECU_Identification/InstallationProgressAndResultObtaining":
+    Minimum size of data must be 8 bits. Current minimum size of data is 0 bits.
+Error: Extended Data Record 'qpath:/Base_Variant/FaultMemory/[EXTENDEDDATARECORD]Extended_Data_Record_0x01' contains Extended Data with invalid telegram table length, the minimum length required is 8 bit.
+Error: Extended Data Record 'qpath:/Base_Variant/FaultMemory/[EXTENDEDDATARECORD]Extended_Data_Record_0x02' contains Extended Data with invalid telegram table length, the minimum length required is 8 bit.
+Error: Extended Data Record 'qpath:/Base_Variant/FaultMemory/[EXTENDEDDATARECORD]Extended_Data_Record_0x03' contains Extended Data with invalid telegram table length, the minimum length required is 8 bit.
+Error: Extended Data Record 'qpath:/Base_Variant/FaultMemory/[EXTENDEDDATARECORD]Extended_Data_Record_0x04' contains Extended Data with invalid telegram table length, the minimum length required is 8 bit.
+Warning: DTC table in Diagnostic Instance qpath:/Base_Variant/User_Defined_Fault_Memories/User_Defined_Fault_Memory_1' has no DTC.
+  Multiplexer component 'qpath:/Base_Variant/User_Defined_Fault_Memories/User_Defined_Fault_Memory_1/[CONTENT]DTCSnapshotRecord' shared in shared proxy component 'DTCSnapshotRecord':
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+Warning: DTC table in Diagnostic Instance qpath:/Base_Variant/User_Defined_Fault_Memories/User_Defined_Fault_Memory_2' has no DTC.
+  Multiplexer component 'qpath:/Base_Variant/User_Defined_Fault_Memories/User_Defined_Fault_Memory_2/[CONTENT]DTCSnapshotRecord' shared in shared proxy component 'DTCSnapshotRecord':
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+Warning: DTC table in Diagnostic Instance qpath:/Base_Variant/User_Defined_Fault_Memories/User_Defined_Fault_Memory_3' has no DTC.
+  Multiplexer component 'qpath:/Base_Variant/User_Defined_Fault_Memories/User_Defined_Fault_Memory_3/[CONTENT]DTCSnapshotRecord' shared in shared proxy component 'DTCSnapshotRecord':
+    Minimum size of data must be 8 bits. The current (maximum) size of data is 0 bits.
+  Data object 'FilePathandName' references data type 'Hex Dump (1..65536 Bytes)'. This data type does not have a fix length or size info. The data object is used by a component that is either not the primitive's last component, or is part of an iterative component.
+Variant : 'Base Variant' Diagnostic instance: 'File Transfer' Content: 'File Path and Name': 
+  Data object 'FilePathandName' references data type 'Hex Dump (1..65536 Bytes)'. This data type does not have a fix length or size info. The data object is used by a component that is either not the primitive's last component, or is part of an iterative component.
+Inconsistencies detected.
+ComParamMan: Setting COM parameter 'BusType' to value 'Ethernet' failed. Invalid value!
+ComParamMan: Unidentified ComParam CP_DoIPLogicalGatewayAddress
+ComParamMan: Unidentified ComParam CP_DoIPLogicalEcuAddress
+ComParamMan: Unidentified ComParam CP_DoIPLogicalTesterAddress
+ComParamMan: Unidentified ComParam CP_DoIPLogicalFunctionalAddress
+ComParamMan: Unidentified ComParam CP_P6Max
+ComParamMan: Unidentified ComParam CP_P2Max_Ecu
+ComParamMan: Unidentified ComParam CP_P6Star
+ComParamMan: Unidentified ComParam CP_P2Star_Ecu
+ComParamMan: Unidentified ComParam CP_TesterPresentTime
+ComParamMan: Unidentified ComParam CP_TesterPresentTime_Ecu
+ComParamMan: Unidentified ComParam CP_P3Phys
+ComParamMan: Unidentified ComParam CP_P3Func
+ComParamMan: Unidentified ComParam CP_NetworkTransmissionTime
+ComParamMan: Unidentified ComParam CP_RC78Handling
+ComParamMan: Unidentified ComParam CP_RC78CompletionTimeout
+ComParamMan: Unidentified ComParam CP_RC21Handling
+ComParamMan: Unidentified ComParam CP_RC21RequestTime
+ComParamMan: Unidentified ComParam CP_RC21CompletionTimeout
+ComParamMan: Unidentified ComParam DiagnosticConnectionRef
+ComParamMan: Unidentified ComParam DiagnosticProtocolPriority
+ComParamMan: Unidentified ComParam SendRespPendOnTransToBoot
+Checking service prefixes in base variant "Base_Variant" ... OK
+Non-fatal inconsistencies detected in document.
